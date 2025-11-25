@@ -1,5 +1,5 @@
 <?php
-    class DataBase {
+    class database {
         public static function connect($host='localhost', $user='root', $db='porscheats', $pass='root') {
             $con = new mysqli($host, $user, $pass, $db);
 

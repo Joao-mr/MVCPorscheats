@@ -1,0 +1,57 @@
+
+/*TIPOGRAFIA IMPORTADA PORSCHE NEXT*/
+
+@font-face{
+    font-family: 'Porsche Next';
+    src: url('../Tipografia/PorscheNext.ttf') format('opentype');
+    font-weight: 400;
+}
+
+@font-face{
+    font-family: 'Porsche Next';
+    src: url('../Tipografia/PorscheNext-SemiBold.otf') format('opentype');
+    font-weight: 600;
+}
+
+body{
+    font-family: 'Porsche Next', sans-serif;
+}
+
+/*NAVBAR*/
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.navbar-brand img {
+    display:block;
+    height:38px;
+}
+
+.navbar .nav-link img {
+    width:26px;
+    height:26px;
+    object-fit:contain;
+}
+
+.offcanvas .nav-link {
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+}
+
+@media (min-width: 992px) {
+    .navbar-brand {
+        position:absolute;
+        left:50%;
+        transform:translateX(-50%);
+    }
+}
+
+
+/*FOOTER*/
+
+
+
+/*HOME*/
