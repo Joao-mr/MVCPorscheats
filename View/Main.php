@@ -1,6 +1,6 @@
 <?php
-$navPath    = __DIR__ . '/Partials/Navbar.php';
-$footerPath = __DIR__ . '/Partials/Footer.php';
+$nav    = __DIR__ . '/Partials/Navbar.php';
+$footer = __DIR__ . '/Partials/Footer.php';
 ?>
 
 <!DOCTYPE html>
@@ -19,15 +19,20 @@ $footerPath = __DIR__ . '/Partials/Footer.php';
 <body>
 
     <!-- Navbar -->
-    <?php include_once $navPath; ?>
+    <?php include_once $nav; ?>
 
     <!-- Contenido -->
     <main>
-        <?php echo isset($view) ? include $view : '<p>Error: vista no definida.</p>'; ?>
+        <?php 
+        if (isset($view) && file_exists($view)) {
+            include $view;
+        } else {
+            echo "<p>Error: la vista '$view' no existe.</p>";
+        }?>
     </main>
 
     <!-- Footer -->
-    <?php include_once $footerPath; ?>
+    <?php include_once $footer; ?>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

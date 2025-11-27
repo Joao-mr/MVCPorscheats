@@ -13,26 +13,19 @@
 }
 
 body{
-    font-family: 'Porsche Next', sans-serif;
+    font-family: 'Porsche Next' !important;
 }
 
 /*NAVBAR*/
 
-body {
-    background-color: #000;
-    color: #fff;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-}
-
 .navbar-brand img {
-    display:block;
-    height:38px;
+    display: block;
+    height: clamp(50px, 9vw, 50px);
+    width: auto;
 }
 
 .navbar .nav-link img {
-    width:26px;
-    height:26px;
-    object-fit:contain;
+    height: clamp(28px, 3.5vw, 38px);
 }
 
 .offcanvas .nav-link {
@@ -48,6 +41,25 @@ body {
     }
 }
 
+@media (max-width: 576px) {
+    .navbar-brand img {
+        height: 22px;
+    }
+    .navbar .nav-link img {
+        height: 22px;
+    }
+    .navbar-toggler {
+        transform: scale(0.85);
+    }
+}
+
+.navbar {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
 
 /*FOOTER*/
 
@@ -91,3 +103,144 @@ body {
 }
 
 /*HOME*/
+
+/*Header*/
+
+.hero-kobe {
+    min-height: 100vh;
+    background: url('/MVCPorscheats/Public/images/platos/bannerr.png') center/cover no-repeat;
+    position: relative;
+    padding: 5rem 0;
+}
+
+.hero-kobe .btn-outline-light {
+    letter-spacing: 0.08em;
+}
+
+/*Primera seccion */
+
+.card-experiencia {
+    display:block;
+    position:relative;
+    min-height:290px;
+    border-radius:14px;
+    overflow:hidden;
+    background-size:cover;
+    background-position:center;
+    text-decoration:none;
+}
+
+.card-experiencia--xl {
+    min-height:360px;
+}
+
+@media (max-width: 768px) {
+    .card-experiencia--xl {
+        min-height:280px;
+    }
+}
+
+.card-experiencia::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(0, 0, 0, 0.592));
+}
+.card-experiencia__body {
+    position:absolute;
+    inset:auto 0 0 0;
+    padding:1.2rem 1.4rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#fff;
+    z-index:1;
+}
+.card-experiencia .arrow {
+    font-size:1.4rem;
+    transition:transform .2s;
+}
+.card-experiencia:hover .arrow {
+    transform:translateX(4px);
+}
+
+/*Segunda seccion */
+
+.experiencias-grid h2 {
+    text-transform: uppercase;
+    letter-spacing: 0.08em; 
+    font-size: 2.5rem;
+}
+
+.card-experiencia__body h3 {
+    font-size: 1.1rem;
+    margin-bottom: .3rem;
+}
+
+.card-experiencia__body p {
+    font-size: .85rem;
+    color: rgba(255,255,255,0.75);
+    margin: 0;
+}
+
+.experiencias-grid .card-experiencia {
+    min-height: 500px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.experiencias-grid .card-experiencia:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 18px 35px rgba(0,0,0,0.35);
+}
+
+/*Tercera seccion*/
+
+.experiencias-search {
+    background-color: #f9f9f9;
+}
+
+.experiencias-search h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    max-width: 500px;
+    
+}
+
+.experiencias-search p {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 1.5rem;
+    max-width: 450px;
+
+}
+
+.experiencias-search .search-box {
+    position: relative;
+    max-width: 520px;
+}
+
+.experiencias-search .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}
+
+.experiencias-search .search-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.experiencias-search .form-control {
+    padding: 0.9rem 1rem 0.9rem 3rem;
+    border-radius: 0;
+    border: 1px solid #1b1b1b;
+    background-color: transparent;
+}
+
+.experiencias-search .form-control:disabled {
+    background-color: transparent;
+    opacity: 1;
+}
+

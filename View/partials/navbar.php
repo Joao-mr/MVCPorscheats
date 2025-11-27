@@ -10,16 +10,16 @@
 
         <!-- Logo centrado -->
         <a class="navbar-brand mx-auto" href="index.php?controller=Home&action=index">
-            <img src="/MVCPorscheats/Public/images/logos/LogoBlancoLetras.png" alt="Porscheats" height="38">
+            <img src="/MVCPorscheats/Public/images/logos/LogoLetrasBlanco.png" alt="Porscheats" height="38">
         </a>
 
         <!-- Iconos derecha -->
         <div class="d-flex align-items-center">
             <a class="nav-link text-white" href="index.php?controller=Pedido&action=cesta" aria-label="Carrito">
-                <img src="/MVCPorscheats/Public/images/iconos/shopping-cart-white.svg" alt="Carrito" height="26">
+                <img src="/MVCPorscheats/Public/images/iconos/shopping-cart-white.svg" alt="Carrito" >
             </a>
             <a class="nav-link text-white ms-3" href="index.php?controller=Usuario&action=cuenta" aria-label="Cuenta">
-                <img src="/MVCPorscheats/Public/images/iconos/user.svg" alt="Cuenta" height="26">
+                <img src="/MVCPorscheats/Public/images/iconos/user.svg" alt="Cuenta">
             </a>
         </div>
     </div>

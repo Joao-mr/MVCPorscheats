@@ -29,30 +29,6 @@
             </div>
         </div>
 
-        <div class="row text-white-50 mt-5">
-            <div class="col-md-3">
-                <p class="mb-2 text-uppercase small">Empresa</p>
-                <ul class="list-unstyled mb-0">
-                    <li><a href="#" class="link-light">Porschets iberica</a></li>
-                    <li><a href="#" class="link-light">Compliance</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <p class="mb-2 text-uppercase small invisible">.</p>
-                <ul class="list-unstyled mb-0">
-                    <li><a href="#" class="link-light">Empleo</a></li>
-                    <li><a href="#" class="link-light">Sostenibilidad</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <p class="mb-2 text-uppercase small invisible">.</p>
-                <ul class="list-unstyled mb-0">
-                    <li><a href="#" class="link-light">Global Partnership Council</a></li>
-                    <li><a href="#" class="link-light">Newsroom y Notas de Prensa</a></li>
-                </ul>
-            </div>
-        </div>
-
         <hr class="border-secondary my-4">
 
         <p class="small text-white-50 mb-4">
