@@ -40,7 +40,7 @@
         ** Descubra nuestras experiencias gastronómicas exclusivas y menús inspirados en el espíritu Porsche en la sección Experiencias Porscheats.        </p>
 
         <div class="text-center">
-            <img src="/MVCPorscheats/Public/images/logos/LogoBlancoLetras.png" alt="Porscheats" height="34">
+            <img src="/MVCPorscheats/Public/images/logos/LogoLetrasBlanco.png" alt="Porscheats" height="34">
         </div>
     </div>
 </footer>

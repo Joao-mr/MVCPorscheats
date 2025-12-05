@@ -15,8 +15,9 @@
 body{
     font-family: 'Porsche Next' !important;
 }
-
-/*NAVBAR*/
+/* ----------------------------------------
+   NAVBAR – Estilos Comunes
+---------------------------------------- */
 
 .navbar-brand img {
     display: block;
@@ -24,42 +25,71 @@ body{
     width: auto;
 }
 
+.navbar-home .navbar-toggler span,
+.navbar-black .navbar-toggler span {
+    color: inherit !important;
+}
+
 .navbar .nav-link img {
     height: clamp(28px, 3.5vw, 38px);
 }
 
 .offcanvas .nav-link {
-    text-transform:uppercase;
-    letter-spacing:0.08em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
 
+/* Centrar logo en escritorio */
 @media (min-width: 992px) {
     .navbar-brand {
-        position:absolute;
-        left:50%;
-        transform:translateX(-50%);
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
+/* Móvil */
 @media (max-width: 576px) {
-    .navbar-brand img {
-        height: 22px;
-    }
+    .navbar-brand img,
     .navbar .nav-link img {
         height: 22px;
     }
+
     .navbar-toggler {
         transform: scale(0.85);
     }
 }
 
-.navbar {
+/* ----------------------------------------
+   NAVBAR HOME (blanco)
+---------------------------------------- */
+
+.navbar-home {
     position: absolute;
     top: 20px;
-    left: 0;
     width: 100%;
     z-index: 10;
+    background-color: transparent;
 }
+
+.navbar-home .navbar-toggler span {
+    color: #fff !important;
+}
+
+
+/* ----------------------------------------
+   NAVBAR INTERIOR (negro)
+---------------------------------------- */
+
+.navbar-black {
+    background-color: #ffffff00;
+    border-bottom: 1px solid #eee;
+}
+
+.navbar-black .navbar-toggler span {
+    color: #111 !important;
+}
+
 
 /*FOOTER*/
 
@@ -244,3 +274,87 @@ body{
     opacity: 1;
 }
 
+
+/* ----------------------------------------
+   PRODUCTOS
+---------------------------------------- */
+
+.productos-page {
+    background: #f4f4f4;
+}
+
+.filtros-card {
+    background: #fff;
+    border-radius: 18px;
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 110px;
+}
+
+.form-check-input {
+    border: 2px solid #111;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: 0.25rem;
+}
+
+.filtro-toggle {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #dcdcdc;
+    background: transparent;
+    padding: 0.85rem 0;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.filtro-toggle:first-of-type {
+    border-top: 0;
+}
+
+.categoria-titulo {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 600;
+}
+
+.card-producto {
+    background: #fff;
+    border-radius: 24px;
+    padding: 1.5rem;
+    box-shadow: 0 16px 30px rgba(0,0,0,0.08);
+    transition: transform .2s, box-shadow .2s;
+}
+
+.card-producto:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 40px rgba(0,0,0,0.12);
+}
+
+.card-producto__media {
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.card-producto__media img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+}
+
+.card-producto__body h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.card-producto__body p {
+    font-size: 0.95rem;
+}
+
+.card-producto .btn {
+    border-radius: 999px;
+}
