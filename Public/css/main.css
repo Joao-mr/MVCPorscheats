@@ -12,6 +12,21 @@
     font-weight: 600;
 }
 
+/* --- Fix para eliminar scroll horizontal y márgenes inesperados --- */
+
+html, body {
+    overflow-x: hidden; /* Evita desbordamiento lateral */
+}
+
+.productos-page {
+    padding: 0 !important; /* Evita margen blanco superior e inferior */
+}   
+
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
 body{
     font-family: 'Porsche Next' !important;
 }
@@ -82,7 +97,7 @@ body{
 ---------------------------------------- */
 
 .navbar-black {
-    background-color: #ffffff00;
+    background-color: #fff;
     border-bottom: 1px solid #eee;
 }
 
@@ -290,6 +305,7 @@ body{
     box-shadow: 0 12px 24px rgba(0,0,0,0.06);
     position: sticky;
     top: 110px;
+    margin-left: 20px;
 }
 
 .form-check-input {
@@ -318,6 +334,7 @@ body{
 .categoria-titulo {
     font-size: clamp(1.4rem, 3vw, 2rem);
     font-weight: 600;
+    margin-top: 50px;
 }
 
 .card-producto {
@@ -326,7 +343,8 @@ body{
     padding: 1.5rem;
     box-shadow: 0 16px 30px rgba(0,0,0,0.08);
     transition: transform .2s, box-shadow .2s;
-}
+    margin-right: 20px;
+}   
 
 .card-producto:hover {
     transform: translateY(-4px);
@@ -357,4 +375,18 @@ body{
 
 .card-producto .btn {
     border-radius: 999px;
+}
+
+
+/*Show Producto*/
+
+.producto-show h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+}
+
+.producto-show__media img {
+    width: 100%;
+    max-width: 520px;
+    object-fit: cover;
 }

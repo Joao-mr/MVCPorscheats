@@ -1,5 +1,5 @@
 <?php $selectedCategory = $selectedCategory ?? 'todos'; ?>
-<section class="productos-page py-5">
+<section class="productos-page">
     <div class="container-fluid">
         <div class="row g-5">
 
@@ -30,35 +30,6 @@
                         </div>
                     <?php endforeach; ?>
 
-                    <div class="filtro-group mb-4">
-                        <h5 class="mb-3">Precio</h5>
-                        <?php
-                        $rangosPrecio = [
-                            'p1' => 'Hasta 80 €',
-                            'p2' => '80 € – 150 €',
-                            'p3' => '150 € – 220 €',
-                            'p4' => 'Más de 220 €'
-                        ];
-                        foreach ($rangosPrecio as $id => $texto): ?>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" id="<?= $id; ?>">
-                                <label class="form-check-label" for="<?= $id; ?>"><?= $texto; ?></label>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-
-                    <div class="filtro-group mb-4">
-                    <h5 class="mb-3">Platos</h5>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" id="stockDisponible" checked>
-                            <label class="form-check-label" for="stockDisponible">Disponible</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="stockProximamente">
-                            <label class="form-check-label" for="stockProximamente">Próximamente</label>
-                        </div>
-                    </div>
-
                     <button class="btn btn-outline-dark w-100 mt-4">Eliminar filtros</button>
                 </div>
             </aside>
@@ -68,14 +39,14 @@
                 <?php foreach ($productosPorCategoria as $categoria => $productos): ?>
                     <section class="categoria-block mb-5">
                         <div class="d-flex justify-content-between align-items-baseline mb-3">
-                            <h3 class="categoria-titulo mb-0"><?= ucfirst($categoria); ?> platos</h3>
-                            <span class="text-muted small"><?= count($productos); ?> productos</span>
-                        </div>
+                            <h3 class="categoria-titulo"><?= ucfirst($categoria); ?> platos</h3>
+                            </div>
 
                         <div class="row g-4">
                             <?php foreach ($productos as $producto): ?>
                                 <div class="col-md-6 col-xl-4">
                                     <article class="card-producto h-100 d-flex flex-column">
+                                        
                                         <div class="card-producto__media">
                                             <img src="/MVCPorscheats/Public/images/<?= $producto->getImagen(); ?>" alt="<?= $producto->getNombre(); ?>">
                                         </div>
@@ -91,8 +62,9 @@
                                             </ul>
 
                                             <div class="d-flex gap-2">
-                                                <a class="btn btn-dark flex-grow-1" href="?controller=Producto&action=show&idproducto=<?= $producto->getId_producto(); ?>">Descubrir plato</a>
-                                                <button class="btn btn-outline-dark flex-grow-1">Comprar</button>
+                                                <button class="btn btn-dark flex-grow-1">Comprar</button>
+                                                <a class="btn btn-outline-dark flex-grow-1" href="?controller=Producto&action=show&idproducto=<?= $producto->getId_producto(); ?>">Descubrir plato</a>
+                                                
                                             </div>
                                         </div>
                                     </article>
