@@ -1,8 +1,7 @@
 <?php $selectedCategory = $selectedCategory ?? 'todos'; ?>
 <section class="productos-page">
-    <div class="container-fluid">
-        <div class="row g-5">
-
+    <div class="container-fluid ">
+        <div class="row g-5 ">
             <!-- Filtros laterales -->
             <aside class="col-lg-3">
                 <div class="filtros-card p-4">
@@ -30,7 +29,11 @@
                         </div>
                     <?php endforeach; ?>
 
-                    <button class="btn btn-outline-dark w-100 mt-4">Eliminar filtros</button>
+                    <a class="btn btn-outline-dark w-100 mt-4"
+                       href="index.php?controller=Producto&action=index">
+                        Eliminar filtros
+                    </a>
+
                 </div>
             </aside>
 
@@ -39,7 +42,7 @@
                 <?php foreach ($productosPorCategoria as $categoria => $productos): ?>
                     <section class="categoria-block mb-5">
                         <div class="d-flex justify-content-between align-items-baseline mb-3">
-                            <h3 class="categoria-titulo"><?= ucfirst($categoria); ?> platos</h3>
+                            <h3 class="categoria-titulo"><?= ucfirst($categoria); ?> platos (<?= count($productos); ?>) </h3>
                             </div>
 
                         <div class="row g-4">
@@ -48,17 +51,17 @@
                                     <article class="card-producto h-100 d-flex flex-column">
                                         
                                         <div class="card-producto__media">
-                                            <img src="/MVCPorscheats/Public/images/<?= $producto->getImagen(); ?>" alt="<?= $producto->getNombre(); ?>">
+                                            <img src="/MVCPorscheats/public/images/<?= $producto->getImagen(); ?>" alt="<?= $producto->getNombre(); ?>">
                                         </div>
 
                                         <div class="card-producto__body flex-grow-1 d-flex flex-column">
-                                            <p class="text-muted small mb-1">Desde EUR <?= number_format($producto->getPrecio_unidad(), 2); ?></p>
                                             <h4><?= $producto->getNombre(); ?></h4>
-                                            <p class="text-muted flex-grow-1"><?= $producto->getDescripcion(); ?></p>
+                                            <p class="text-muted small mb-1">Desde EUR <?= number_format($producto->getPrecio_unidad(), 2); ?></p>
+                                            <p class="badge-categoria"><?= ucfirst($producto->getCategoria()); ?></p>
 
+                                            <p class="text-muted flex-grow-1"><?= $producto->getDescripcion(); ?></p>
                                             <ul class="list-unstyled small text-muted mb-3">
                                                 <li><?= $producto->getCaracteristica(); ?></li>
-                                                <li><?= ucfirst($producto->getCategoria()); ?> · <?= $producto->getDisponibilidad(); ?></li>
                                             </ul>
 
                                             <div class="d-flex gap-2">

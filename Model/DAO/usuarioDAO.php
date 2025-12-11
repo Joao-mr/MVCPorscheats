@@ -7,7 +7,7 @@ class UsuarioDAO {
     public static function registrarUsuario($usuario) {
         $con = DataBase::connect();
         $sql = "INSERT INTO usuario (nombre, apellidos, telefono, direccion, email, contrasena, rol, fecha_registro)
-                VALUES (?, ?, ?, ?, ?, ?, 'usuario', NOW())";
+                VALUES (?, ?, ?, ?, ?, ?, 'cliente', NOW())";
 
         $stmt = $con->prepare($sql);
         $stmt->bind_param(
