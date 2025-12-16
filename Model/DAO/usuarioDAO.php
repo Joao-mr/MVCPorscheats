@@ -6,20 +6,26 @@ class UsuarioDAO {
 
     public static function registrarUsuario($usuario) {
         $con = DataBase::connect();
-        $sql = "INSERT INTO usuario (nombre, apellidos, telefono, direccion, email, contrasena, rol, fecha_registro)
-                VALUES (?, ?, ?, ?, ?, ?, 'cliente', NOW())";
 
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param(
-            "ssssss",
-            $usuario->getNombre(),
-            $usuario->getApellido(),
-            $usuario->getTelefono(),
-            $usuario->getDireccion(),
-            $usuario->getEmail(),
-            $usuario->getContrasena()
-        );
+        $email = $usuario->getEmail();
 
+        $check = $con->prepare("SELECT 1 FROM usuario WHERE email = ?");
+        $check->bind_param("s", $email);
+        $check->execute();
+        if ($check->get_result()->num_rows > 0) {
+            $con->close();
+            return false;
+        }
+
+        $nombre     = $usuario->getNombre();
+        $apellido   = $usuario->getApellido();
+        $telefono   = $usuario->getTelefono();
+        $direccion  = $usuario->getDireccion();
+        $contrasena = $usuario->getContrasena();
+
+        $stmt = $con->prepare("INSERT INTO usuario (nombre, apellidos, telefono, direccion, email, contrasena, rol, fecha_registro)
+                               VALUES (?, ?, ?, ?, ?, ?, 'cliente', NOW())");
+        $stmt->bind_param("ssssss", $nombre, $apellido, $telefono, $direccion, $email, $contrasena);
         $stmt->execute();
         $con->close();
         return true;

@@ -17,7 +17,7 @@ $isLogged = isset($_SESSION['usuario']);
 
             <!-- Logo -->
             <a class="navbar-brand mx-auto" href="index.php?controller=Home&action=index">
-                <img src="/MVCPorscheats/Public/images/logos/LogoLetrasNegras.png" height="38">
+                <img src="/MVCPorscheats/Public/images/logos/LogoLetrasNegras.svg" height="38">
             </a>
 
             <!-- Icono usuario -->

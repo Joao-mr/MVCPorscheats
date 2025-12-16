@@ -37,7 +37,6 @@ class UsuarioController {
     }
 
     public function procesarRegistro() {
-
         $usuario = new Usuario();
         $usuario->setNombre($_POST['nombre']);
         $usuario->setApellido($_POST['apellidos'] ?? '');
@@ -46,8 +45,14 @@ class UsuarioController {
         $usuario->setEmail($_POST['email']);
         $usuario->setContrasena(password_hash($_POST['contrasena'], PASSWORD_BCRYPT));
 
-        UsuarioDAO::registrarUsuario($usuario);
-        session_start();
+        if (!UsuarioDAO::registrarUsuario($usuario)) {
+            $error    = "El correo ya está registrado.";
+            $view     = 'view/usuario/registro.php';
+            $navClass = 'estilo_negro';
+            include 'view/main.php';
+            return;
+        }
+
         $_SESSION['usuario'] = [
             'id'     => $usuario->getId_usuario(),
             'nombre' => $usuario->getNombre(),
@@ -74,5 +79,5 @@ class UsuarioController {
     $navClass = "estilo_negro";
     include "view/main.php";
 }
-
 }
+
