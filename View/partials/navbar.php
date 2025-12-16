@@ -1,6 +1,7 @@
 <?php 
 if (session_status() === PHP_SESSION_NONE) session_start();
 $isLogged = isset($_SESSION['usuario']);
+$isAdmin  = $isLogged && (($_SESSION['usuario']['rol'] ?? '') === 'admin');
 ?>
 
 <?php if (!empty($navClass) && $navClass === 'estilo_negro'): ?>
@@ -121,6 +122,12 @@ $isLogged = isset($_SESSION['usuario']);
                     <a class="nav-link text-white" href="index.php?controller=Usuario&action=registro">Registrarse</a>
                 </li>
 
+            <?php endif; ?>
+
+            <?php if ($isAdmin): ?>
+                <li class="nav-item">
+                    <a class="nav-link text-warning" href="index.php?controller=Admin&action=index">Panel de administración</a>
+                </li>
             <?php endif; ?>
 
         </ul>

@@ -21,7 +21,8 @@ class UsuarioController {
             $_SESSION['usuario'] = [
                 'id'     => $usuario->getId_usuario(),
                 'nombre' => $usuario->getNombre(),
-                'email'  => $usuario->getEmail()
+                'email'  => $usuario->getEmail(),
+                'rol'    => $usuario->getRol()
             ];
             header("Location: index.php");
             exit;
@@ -56,7 +57,8 @@ class UsuarioController {
         $_SESSION['usuario'] = [
             'id'     => $usuario->getId_usuario(),
             'nombre' => $usuario->getNombre(),
-            'email'  => $usuario->getEmail()
+            'email'  => $usuario->getEmail(),
+            'rol'    => 'cliente'
         ];
         header("Location: index.php");
         exit;
