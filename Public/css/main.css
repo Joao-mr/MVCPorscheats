@@ -1,0 +1,403 @@
+/*TIPOGRAFIA IMPORTADA PORSCHE NEXT*/
+
+@font-face{
+    font-family: 'Porsche Next';
+    src: url('../Tipografia/PorscheNext.ttf') format('opentype');
+    font-weight: 400;
+}
+
+@font-face{
+    font-family: 'Porsche Next';
+    src: url('../Tipografia/PorscheNext-SemiBold.otf') format('opentype');
+    font-weight: 600;
+}
+
+/* --- Fix para eliminar scroll horizontal y márgenes inesperados --- */
+
+html, body {
+    overflow-x: hidden; /* Evita desbordamiento lateral */
+}
+
+.productos-page {
+    padding: 0 !important; /* Evita margen blanco superior e inferior */
+}   
+
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+body{
+    font-family: 'Porsche Next' !important;
+}
+/* ----------------------------------------
+   NAVBAR – Estilos Comunes
+---------------------------------------- */
+
+.navbar-brand img {
+    display: block;
+    height: clamp(40px, 8vw, 40px);
+    width: auto;
+}
+
+.navbar-home .navbar-toggler span,
+.navbar-black .navbar-toggler span {
+    color: inherit !important;
+}
+
+.navbar .nav-link img {
+    height: clamp(20px, 3.5vw, 35px);
+}
+
+.offcanvas .nav-link {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Centrar logo en escritorio */
+@media (min-width: 992px) {
+    .navbar-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Móvil */
+@media (max-width: 576px) {
+    .navbar-brand img,
+    .navbar .nav-link img {
+        height: 22px;
+    }
+
+    .navbar-toggler {
+        transform: scale(0.85);
+    }
+}
+
+/* ----------------------------------------
+   NAVBAR HOME (blanco)
+---------------------------------------- */
+
+.navbar-home {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    z-index: 10;
+    background-color: transparent;
+}
+
+.navbar-home .navbar-toggler span {
+    color: #fff !important;
+}
+
+
+/* ----------------------------------------
+   NAVBAR INTERIOR (negro)
+---------------------------------------- */
+
+.navbar-black {
+   background-color: transparent;
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+
+.navbar-black .navbar-toggler span {
+    color: #111 !important;
+}
+
+
+/*FOOTER*/
+
+.footer {
+    background-color: #000;
+    font-size: 0.9rem;
+}
+
+.footer a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer a:hover {
+    color: #ffffff;
+}
+
+.footer .btn-outline-light {
+    font-size: 0.8rem;
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
+}
+
+.footer .btn-outline-light:hover,
+.footer .btn-outline-light:focus,
+.footer .btn-outline-light:active {
+    background-color: #afafaf;
+    border-color: #afafaf;  
+    color: #000;
+}
+
+.footer .btn-outline-light img {
+    filter: brightness(0);
+    width: 20px;
+    height: 20px;
+}
+
+.footer .btn-outline-light:hover img {
+    filter: brightness(0.2);
+}
+
+/*HOME*/
+
+/*Header*/
+
+.hero-kobe {
+    min-height: 100vh;
+    background: url('/MVCPorscheats/Public/images/platos/bannerr.webp') center/cover no-repeat;
+    position: relative;
+    padding: 5rem 0;
+}
+
+.hero-kobe .btn-outline-light {
+    letter-spacing: 0.08em;
+}
+
+/*Primera seccion */
+
+.card-experiencia {
+    display:block;
+    position:relative;
+    min-height:290px;
+    border-radius:14px;
+    overflow:hidden;
+    background-size:cover;
+    background-position:center;
+    text-decoration:none;
+}
+
+.card-experiencia--xl {
+    min-height:360px;
+}
+
+@media (max-width: 768px) {
+    .card-experiencia--xl {
+        min-height:280px;
+    }
+}
+
+.card-experiencia::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(0, 0, 0, 0.592));
+}
+.card-experiencia__body {
+    position:absolute;
+    inset:auto 0 0 0;
+    padding:1.2rem 1.4rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#fff;
+    z-index:1;
+}
+.card-experiencia .arrow {
+    font-size:1.4rem;
+    transition:transform .2s;
+}
+.card-experiencia:hover .arrow {
+    transform:translateX(4px);
+}
+
+/*Segunda seccion */
+
+.experiencias-grid h2 {
+    text-transform: uppercase;
+    letter-spacing: 0.08em; 
+    font-size: 2.5rem;
+}
+
+.card-experiencia__body h3 {
+    font-size: 1.1rem;
+    margin-bottom: .3rem;
+}
+
+.card-experiencia__body p {
+    font-size: .85rem;
+    color: rgba(255,255,255,0.75);
+    margin: 0;
+}
+
+.experiencias-grid .card-experiencia {
+    min-height: 500px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.experiencias-grid .card-experiencia:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 18px 35px rgba(0,0,0,0.35);
+}
+
+/*Tercera seccion*/
+
+.experiencias-search {
+    background-color: #f9f9f9;
+}
+
+.experiencias-search h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    max-width: 500px;
+    
+}
+
+.experiencias-search p {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 1.5rem;
+    max-width: 450px;
+
+}
+
+.experiencias-search .search-box {
+    position: relative;
+    max-width: 520px;
+}
+
+.experiencias-search .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}
+
+.experiencias-search .search-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.experiencias-search .form-control {
+    padding: 0.9rem 1rem 0.9rem 3rem;
+    border-radius: 0;
+    border: 1px solid #1b1b1b;
+    background-color: transparent;
+}
+
+.experiencias-search .form-control:disabled {
+    background-color: transparent;
+    opacity: 1;
+}
+
+
+/* ----------------------------------------
+   PRODUCTOS
+---------------------------------------- */
+
+.productos-page {
+    background: #f4f4f4;
+}
+
+.filtros-card {
+    background: #fff;
+    border-radius: 18px;
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 110px;
+    margin-left: 20px;
+}
+
+.form-check-input {
+    border: 2px solid #111;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: 0.25rem;
+}
+
+.filtro-toggle {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #dcdcdc;
+    background: transparent;
+    padding: 0.85rem 0;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.filtro-toggle:first-of-type {
+    border-top: 0;
+}
+
+.categoria-titulo {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+.card-producto {
+    background: #fff;
+    border-radius: 24px;
+    padding: 1.5rem;
+    box-shadow: 0 16px 30px rgba(0,0,0,0.08);
+    transition: transform .2s, box-shadow .2s;
+    margin-right: 20px;
+}   
+
+.badge-categoria {
+    text-align: center;
+    max-width: 25%;
+    background: #ececec;
+    color: #000;
+    margin-bottom: 0.6rem;
+    border-radius: 5px;
+}
+
+.card-producto:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 40px rgba(0,0,0,0.12);
+}
+
+.card-producto__media {
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.card-producto__media img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+}
+
+.card-producto__body h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.card-producto__body p {
+    font-size: 0.95rem;
+}
+
+.card-producto .btn {
+    border-radius: 999px;
+}
+
+
+/*Show Producto*/
+
+.producto-show h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+}
+
+.producto-show__media img {
+    width: 100%;
+    max-width: 520px;
+    object-fit: cover;
+}
