@@ -21,12 +21,12 @@ $isAdmin  = $isLogged && (($_SESSION['usuario']['rol'] ?? '') === 'admin');
                 <img src="/MVCPorscheats/Public/images/logos/LogoLetrasNegras.svg" height="38">
             </a>
 
-            <!-- Icono usuario -->
+            <!-- Icono carro -->
             <div class="d-flex align-items-center">
-                <a class="nav-link text-dark" href="index.php?controller=Pedido&action=cesta">
+                <a class="nav-link text-dark" href="index.php?controller=Pedido&action=carrito">
                     <img src="/MVCPorscheats/Public/images/iconos/shopping-cart.svg">
                 </a>
-
+            <!-- Icono carro -->
                 <?php if ($isLogged): ?>
                     <a class="nav-link text-dark ms-3" href="index.php?controller=Usuario&action=cuenta">
                         <img src="/MVCPorscheats/Public/images/iconos/user-black.svg">
@@ -55,15 +55,15 @@ $isAdmin  = $isLogged && (($_SESSION['usuario']['rol'] ?? '') === 'admin');
 
             <!-- Logo -->
             <a class="navbar-brand mx-auto" href="index.php?controller=Home&action=index">
-                <img src="/MVCPorscheats/Public/images/logos/LogoLetrasBlanco.png" height="38">
+                <img src="/MVCPorscheats/Public/images/logos/LogoLetrasBlanco.svg" height="38">
             </a>
 
-            <!-- Iconos -->
+            <!-- Iconos carrito-->
             <div class="d-flex align-items-center">
-                <a class="nav-link text-white" href="index.php?controller=Pedido&action=cesta">
+                <a class="nav-link text-white" href="index.php?controller=Pedido&action=carrito">
                     <img src="/MVCPorscheats/Public/images/iconos/shopping-cart-white.svg">
                 </a>
-
+            <!-- Iconos cuenta-->
                 <?php if ($isLogged): ?>
                     <a class="nav-link text-white ms-3" href="index.php?controller=Usuario&action=cuenta">
                         <img src="/MVCPorscheats/Public/images/iconos/user.svg">

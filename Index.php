@@ -14,7 +14,7 @@
 }
 */
 
-    require_once 'database/database.php';
+require_once __DIR__ . '/database/database.php';
 
 
 // 2. Cargar el controlador solicitado
