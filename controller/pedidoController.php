@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Model/DAO/pedidoDAO.php';
+require_once __DIR__ . '/../model/DAO/pedidoDAO.php';
 
 class PedidoController
 {
@@ -12,7 +12,7 @@ class PedidoController
 
     public function carrito(): void
     {
-        $view = __DIR__ . '/../View/pedido/carrito.php';
+        $view = __DIR__ . '/../view/pedido/carrito.php';
         $pageTitle = 'Carrito | Porscheats';
         $lineas = []; // $this->pedidoDAO->obtenerLineasCarrito($idUsuario);
         $navClass = 'estilo_negro';
@@ -21,6 +21,6 @@ class PedidoController
             throw new RuntimeException('No se encuentra la vista de carrito.');
         }
 
-        require __DIR__ . '/../View/Main.php';
+        require __DIR__ . '/../view/main.php';
     }
 }
