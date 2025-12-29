@@ -4,7 +4,7 @@
             <div class="col-md-4">
                 <p class="text-uppercase small mb-2">Región / Idioma Actual</p>
                 <div class="d-flex align-items-center gap-2">
-                    <img src="/MVCPorscheats/public/images/iconos/banderESP.svg" alt="ES" width="24">
+                    <img src="public/images/iconos/banderESP.svg" alt="ES" width="24">
                     <span>España / Español</span>
                 </div>
             </div>
@@ -19,12 +19,12 @@
                 <h6 class="text-uppercase">Redes Sociales</h6>
                 <p class="text-white-50">Ponte en contacto con nosotros a través de las redes sociales.</p>
                 <div class="d-flex flex-wrap gap-2">
-                    <a class="btn btn-outline-light btn-sm" href="#"><img src="/MVCPorscheats/Public/images/iconos/logo-facebook.svg" alt="facebook logo"></a>
-                    <a class="btn btn-outline-light btn-sm" href="#"><img src="/MVCPorscheats/Public/images/iconos/logo-instagram.svg" alt="instagram logo"></a>
-                    <a class="btn btn-outline-light btn-sm" href="#"><img src="/MVCPorscheats/Public/images/iconos/logo-pinterest.svg" alt="pinterest logo"></a>
-                    <a class="btn btn-outline-light btn-sm" href="#"><img src="/MVCPorscheats/Public/images/iconos/logo-youtube.svg" alt="youtube logo"></a>
-                    <a class="btn btn-outline-light btn-sm" href="#"><img src="/MVCPorscheats/Public/images/iconos/logo-x.svg" alt="x logo"></a>
-                    <a class="btn btn-outline-light btn-sm" href="#"><img src="/MVCPorscheats/Public/images/iconos/logo-linkedin.svg" alt="linkedin logo"></a>
+                    <a class="btn btn-outline-light btn-sm" href="#"><img src="public/images/iconos/logo-facebook.svg" alt="facebook logo"></a>
+                    <a class="btn btn-outline-light btn-sm" href="#"><img src="public/images/iconos/logo-instagram.svg" alt="instagram logo"></a>
+                    <a class="btn btn-outline-light btn-sm" href="#"><img src="public/images/iconos/logo-pinterest.svg" alt="pinterest logo"></a>
+                    <a class="btn btn-outline-light btn-sm" href="#"><img src="public/images/iconos/logo-youtube.svg" alt="youtube logo"></a>
+                    <a class="btn btn-outline-light btn-sm" href="#"><img src="public/images/iconos/logo-x.svg" alt="x logo"></a>
+                    <a class="btn btn-outline-light btn-sm" href="#"><img src="public/images/iconos/logo-linkedin.svg" alt="linkedin logo"></a>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
         ** Descubra nuestras experiencias gastronómicas exclusivas y menús inspirados en el espíritu Porsche en la sección Experiencias Porscheats.        </p>
 
         <div class="text-center">
-            <img src="/MVCPorscheats/Public/images/logos/LogoLetrasBlanco.png" alt="Porscheats" height="34">
+            <img src="public/images/logos/LogoLetrasBlanco.svg" alt="Porscheats" height="34">
         </div>
     </div>
 </footer>
