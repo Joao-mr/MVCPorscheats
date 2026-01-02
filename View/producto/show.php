@@ -17,10 +17,17 @@
                     <li><strong>Precio:</strong> EUR <?= number_format($producto->getPrecio_unidad(), 2); ?></li>
                     <li><strong>Disponibilidad:</strong> <?= $producto->getDisponibilidad(); ?></li>
                 </ul>
-                <form method="post" action="index.php?controller=Pedido&action=agregar">
+
                     <input type="hidden" name="idproducto" value="<?= $producto->getId_producto(); ?>">
-                    <button class="btn btn-dark btn-lg px-5">Agregar al carrito</button>
-                </form>
+                    <button 
+                        class="btn btn-dark btn-lg px-5 js-btn-comprar"
+                        data-id="<?= $producto->getId_producto(); ?>"
+                        data-nombre="<?= $producto->getNombre(); ?>"
+                        data-precio="<?= $producto->getPrecio_unidad(); ?>"
+                        data-imagen="public/images/<?= $producto->getImagen(); ?>"
+                        data-categoria="<?= $producto->getCategoria(); ?>"
+                        >Agregar al carrito
+                    </button>
             </div>
         </div>
     </div>

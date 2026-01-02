@@ -65,7 +65,16 @@
                                             </ul>
 
                                             <div class="d-flex gap-2">
-                                                <button class="btn btn-dark flex-grow-1">Comprar</button>
+                                            <button 
+                                                class="btn btn-dark flex-grow-1 js-btn-comprar"
+                                                data-id="<?= $producto->getId_producto(); ?>"
+                                                data-nombre="<?= $producto->getNombre(); ?>"
+                                                data-precio="<?= $producto->getPrecio_unidad(); ?>"
+                                                data-imagen="/MVCPorscheats/public/images/<?= $producto->getImagen(); ?>"
+                                                data-categoria="<?= $producto->getCategoria(); ?>"
+                                                >Comprar
+                                            </button>
+
                                                 <a class="btn btn-outline-dark flex-grow-1" href="?controller=Producto&action=show&idproducto=<?= $producto->getId_producto(); ?>">Descubrir plato</a>
                                                 
                                             </div>

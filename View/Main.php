@@ -38,8 +38,12 @@ $footer = __DIR__ . '/Partials/Footer.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     
-  <!-- Elimina si no existe main.js o créalo -->
-    <!-- <script src="/MVCPorscheats/Public/js/main.js"></script> -->
+    <script src="/MVCPorscheats/public/js/main.js"></script>
+
+    <?php if (isset($view) && str_contains($view, 'pedido/carrito')): ?>
+        <script src="/MVCPorscheats/public/js/carrito.js"></script>
+    <?php endif; ?>
+
 </body>
 </html>
 
