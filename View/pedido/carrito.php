@@ -59,8 +59,8 @@
                         <span id="total">0.00 €</span>
                     </div>
 
-                    <a href="index.php?controller=Pedido&action=confirmar" class="btn btn-dark w-100">
-                        Finalizar pedido
+                    <a href="index.php?controller=Pedido&action=confirmarVista" class="btn btn-dark w-100">
+                        Finalizar compra
                     </a>
                 </div>
             </div>

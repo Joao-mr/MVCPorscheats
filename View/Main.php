@@ -1,6 +1,6 @@
 <?php
-$nav    = __DIR__ . '/Partials/Navbar.php';
-$footer = __DIR__ . '/Partials/Footer.php';
+$nav    = __DIR__ . '/partials/navbar.php';
+$footer = __DIR__ . '/partials/footer.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@ $footer = __DIR__ . '/Partials/Footer.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/MVCPorscheats/Public/css/Main.css?v=<?= time(); ?>">
+    <link rel="stylesheet" href="public/css/main.css?v=<?= time(); ?>">
 </head>
 <body>
 
@@ -38,13 +38,11 @@ $footer = __DIR__ . '/Partials/Footer.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     
-    <script src="/MVCPorscheats/public/js/main.js"></script>
+    <script src="public/js/main.js"></script>
+    <script src="public/js/carrito.js"></script>
+    <script src="public/js/pedido.js"></script>
 
-    <?php if (isset($view) && str_contains($view, 'pedido/carrito')): ?>
-        <script src="/MVCPorscheats/public/js/carrito.js"></script>
-    <?php endif; ?>
-
-</body>
+</body> 
 </html>
 
 
