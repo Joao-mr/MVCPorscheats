@@ -42,7 +42,7 @@
                 <?php foreach ($productosPorCategoria as $categoria => $productos): ?>
                     <section class="categoria-block mb-5">
                         <div class="d-flex justify-content-between align-items-baseline mb-3">
-                            <h3 class="categoria-titulo"><?= ucfirst($categoria); ?> platos (<?= count($productos); ?>) </h3>
+                            <h3 class="categoria-titulo"><?= ucfirst($categoria); ?> (<?= count($productos); ?>) </h3>
                             </div>
 
                         <div class="row g-4">

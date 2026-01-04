@@ -6,7 +6,7 @@
             <p class="text-uppercase small text-white-50 mb-2">Nuevo plato</p>
             <h1 class="display-1 fw-semibold text-white">Kobe.</h1>
             <p class="lead text-white-50 mb-4">Corte premium sellado al estilo Porscheats, con guarnición de temporada.</p>
-            <a href="#" class="btn btn-outline-light px-4 py-3">Descubre más</a>
+            <a href="index.php?controller=Producto&action=show&idproducto=136" class="btn btn-outline-light px-4 py-3">Descubre más</a>
         </div>
     </div>
 </section>
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row g-4">
             <div class="col-md-4">
-                <a class="card-experiencia" href="index.php?controller=Evento&action=moet" style="background-image:url('/MVCPorscheats/Public/images/platos/Moet.png');">
+                <a class="card-experiencia" href="#" style="background-image:url('public/images/home/Moet.webp');">
                     <div class="card-experiencia__body">
                         <span>Descúbrelo Porscheats x Moët.</span>
                         <span class="arrow">→</span>
@@ -25,7 +25,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a class="card-experiencia" href="index.php?controller=Evento&action=menugts" style="background-image:url('/MVCPorscheats/Public/images/platos/Carne.png');">
+                <a class="card-experiencia" href="#" style="background-image:url('public/images/home/carne.webp');">
                     <div class="card-experiencia__body">
                         <span>Nuevo Menú GTS</span>
                         <span class="arrow">→</span>
@@ -33,7 +33,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a class="card-experiencia" href="index.php?controller=Evento&action=cena911" style="background-image:url('/MVCPorscheats/Public/images/platos/Mesa.png');">
+                <a class="card-experiencia" href="#" style="background-image:url('public/images/home/Mesa.webp');">
                     <div class="card-experiencia__body">
                         <span>Cena 911 Turbo S</span>
                         <span class="arrow">→</span>
@@ -51,7 +51,7 @@
         <h2 class="text-black mb-4">Nuestras Experiencias Gastronómicas</h2>
         <div class="row g-4">
             <div class="col-md-6 col-lg-6">
-                <a class="card-experiencia card-experiencia--xl" href="index.php?controller=Evento&action=911" style="background-image:url('/MVCPorscheats/Public/images/platos/911TasteExperience.png');">
+                <a class="card-experiencia card-experiencia--xl" href="#" style="background-image:url('public/images/home/911TasteExperience.webp');">
                     <div class="card-experiencia__body">
                         <div>
                             <h3>911 Taste Experience</h3>
@@ -62,7 +62,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-6">
-                <a class="card-experiencia card-experiencia--xl" href="index.php?controller=Evento&action=718" style="background-image:url('/MVCPorscheats/Public/images/platos/718PerformanceDeSabor.png');">
+                <a class="card-experiencia card-experiencia--xl" href="#" style="background-image:url('public/images/home/718PerformanceDeSabor.webp');">
                     <div class="card-experiencia__body">
                         <div>
                             <h3>718 Performance de Sabor</h3>
@@ -73,7 +73,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-6">
-                <a class="card-experiencia card-experiencia--xl" href="index.php?controller=Evento&action=panamera" style="background-image:url('/MVCPorscheats/Public/images/platos/PanameraCut.png');">
+                <a class="card-experiencia card-experiencia--xl" href="#" style="background-image:url('public/images/home/PanameraCut.webp');">
                     <div class="card-experiencia__body">
                         <div>
                             <h3>Panamera Prime Cut</h3>
@@ -84,7 +84,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-6">
-                <a class="card-experiencia card-experiencia--xl" href="index.php?controller=Evento&action=cayman" style="background-image:url('/MVCPorscheats/Public/images/platos/CaymanFusion.png');">
+                <a class="card-experiencia card-experiencia--xl" href="#" style="background-image:url('public/images/home/CaymanFusion.webp');">
                     <div class="card-experiencia__body">
                         <div>
                             <h3>Cayman Fusión</h3>
@@ -95,7 +95,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-6">
-                <a class="card-experiencia card-experiencia--xl" href="index.php?controller=Evento&action=taycan" style="background-image:url('/MVCPorscheats/Public/images/platos/TaycanLineaDulce.png');">
+                <a class="card-experiencia card-experiencia--xl" href="#" style="background-image:url('public/images/home/TaycanLineaDulce.webp');">
                     <div class="card-experiencia__body">
                         <div>
                             <h3>Taycan Línea Dulce</h3>
@@ -106,7 +106,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-6">
-                <a class="card-experiencia card-experiencia--xl" href="index.php?controller=Evento&action=carrera" style="background-image:url('/MVCPorscheats/Public/images/platos/CarreraChampagneDrive.png');">
+                <a class="card-experiencia card-experiencia--xl" href="#" style="background-image:url('public/images/home/CarreraChampagneDrive.webp');">
                     <div class="card-experiencia__body">
                         <div>
                             <h3>Carrera Champagne Drive</h3>
@@ -138,7 +138,7 @@
                 </div>
             </div>
             <div class="col-lg-6 text-center"> 
-                <img class="img-fluid rounded-4 shadow" src="/MVCPorscheats/Public/images/platos/Seccion3.png" alt="Platos Porscheats">
+                <img class="img-fluid rounded-4 shadow" src="public/images/home/Seccion3.webp" alt="Platos Porscheats">
             </div>
         </div>
     </div>

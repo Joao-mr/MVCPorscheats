@@ -4,7 +4,7 @@
             <div class="col-md-4">
                 <p class="text-uppercase small mb-2">Región / Idioma Actual</p>
                 <div class="d-flex align-items-center gap-2">
-                    <img src="public/images/iconos/banderESP.png" alt="ES" width="24">
+                    <img src="public/images/iconos/banderESP.svg" alt="ES" width="24">
                     <span>España / Español</span>
                 </div>
             </div>

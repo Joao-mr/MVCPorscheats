@@ -155,7 +155,7 @@ body{
 
 .hero-kobe {
     min-height: 100vh;
-    background: url('/MVCPorscheats/Public/images/platos/bannerr.webp') center/cover no-repeat;
+    background: url('/MVCPorscheats/public/images/home/banner.webp') center/cover no-repeat;
     position: relative;
     padding: 5rem 0;
 }
