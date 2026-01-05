@@ -25,27 +25,34 @@ document.addEventListener('DOMContentLoaded', function () {
         // Usamos fetch POST con JSON para enviar la información a la ruta que procese el pedido.
        fetch('index.php?controller=Pedido&action=confirmar', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'same-origin', 
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
             body: JSON.stringify(payload)
         })
-            .then(function (response) {
-                if (!response.ok) {
-                    throw new Error('Error al confirmar el pedido.');
+            // 1) Leemos la respuesta como texto para inspeccionarla si llega HTML o warnings.
+            .then(response => response.text())
+            .then(text => {
+                console.log('RESPUESTA RAW:', text); // ayuda a depurar lo que realmente devuelve PHP
+
+                let data;
+                try {
+                    data = JSON.parse(text); // 2) Intentamos convertirlo a JSON.
+                } catch (e) {
+                    throw new Error('Respuesta no es JSON válido'); // si falla, forzamos el catch principal.
                 }
-                return response.json();
+
+                if (data.status === 'ok') {
+                    localStorage.removeItem('carrito'); // pedido correcto → vaciamos carrito
+                    window.location.href = 'index.php?controller=Pedido&action=exito&id=' + data.idPedido;
+                } else if (data.status === 'login_required') {
+                    alert('Debes iniciar sesión');
+                    window.location.href = 'index.php?controller=Usuario&action=login';
+                } else {
+                    alert(data.message || 'Error al confirmar pedido');
+                }
             })
-            .then(function (data) {
-                //  Si el servidor responde correctamente, limpiamos el carrito y redirigimos.
-                localStorage.removeItem('carrito'); // eliminamos todos los productos guardados
-                // Enviamos al usuario a la página de éxito (ajusta la URL si es necesario).
-                window.location.href = 'index.php?controller=Pedido&action=exito&id=' + data.idPedido;
-            })
-            .catch(function (error) {
-                // Ante cualquier fallo mostramos un mensaje simple al usuario.
-                console.error(error);
+            .catch(err => {
+                console.error(err);
                 alert('No se pudo confirmar el pedido. Inténtalo de nuevo.');
             });
     });

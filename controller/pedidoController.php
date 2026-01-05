@@ -29,25 +29,35 @@ class PedidoController
 
     public function confirmar(): void
     {
-        header('Content-Type: application/json');
-
-        // Aseguramos que la sesión esté iniciada para recuperar al usuario logueado.
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // Validamos que exista un usuario autenticado en la sesión.
-        $idUsuario = $_SESSION['usuario']['id'] ?? null;
-        if (!$idUsuario) {
-            echo json_encode(['status' => 'error', 'message' => 'Usuario no autenticado.']);
-            return;
+        if (!ob_get_level()) {
+            ob_start(); // sólo creamos el buffer si no lo había
         }
 
-        // Leemos el cuerpo raw del POST (JSON) y lo convertimos a array.
+        header('Content-Type: application/json; charset=utf-8');
+
+        $idUsuario = $_SESSION['usuario']['id_usuario']
+            ?? $_SESSION['usuario']['id']
+            ?? null;
+
+        if (!$idUsuario) {
+            if (ob_get_level()) {
+                ob_end_clean(); // sólo cerramos si realmente está abierto
+            }
+            echo json_encode(['status' => 'login_required', 'message' => 'Usuario no autenticado.']);
+            exit;
+        }
+
         $payload = json_decode(file_get_contents('php://input'), true);
         if (!is_array($payload) || empty($payload['carrito'])) {
+            if (ob_get_level()) {
+                ob_end_clean(); // sólo cerramos si realmente está abierto
+            }
             echo json_encode(['status' => 'error', 'message' => 'Carrito vacío o datos inválidos.']);
-            return;
+            exit;
         }
 
         try {
@@ -81,11 +91,20 @@ class PedidoController
             }
 
             // Respondemos al frontend con un estado simple.
+            if (ob_get_level()) {
+                ob_end_clean();
+            }
+            http_response_code(200);
             echo json_encode(['status' => 'ok', 'idPedido' => $idPedido]);
+            exit;
         } catch (Throwable $e) {
-            // Si algo falla, devolvemos un error genérico para que el frontend lo maneje.
             error_log($e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => '']);
+            if (ob_get_level()) {
+                ob_end_clean();
+            }
+            http_response_code(500);
+            echo json_encode(['status' => 'error', 'message' => 'No se pudo confirmar el pedido.']);
+            exit;
         }
     }
 
@@ -97,6 +116,29 @@ class PedidoController
 
         if (!is_readable($view)) {
             throw new RuntimeException('No se encuentra la vista de confirmación.');
+        }
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: index.php?controller=Usuario&action=login');
+            exit;
+        }
+
+
+        require __DIR__ . '/../view/main.php';
+    }
+
+    public function exito(): void
+    {
+        $view = __DIR__ . '/../view/pedido/exito.php';
+        $pageTitle = 'Pedido confirmado | Porscheats';
+        $navClass = 'estilo_negro';
+
+        if (!is_readable($view)) {
+            throw new RuntimeException('No se encuentra la vista de éxito.');
         }
 
         require __DIR__ . '/../view/main.php';

@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="d-grid gap-3">
-                            <a class="btn btn-dark" href="index.php?controller=Pedido&action=cesta">Ver mi carrito</a>
+                            <a class="btn btn-dark" href="index.php?controller=Pedido&action=carrito">Ver mi carrito</a>
                             <a class="btn btn-outline-dark" href="index.php?controller=Producto&action=index">Seguir explorando</a>
                             <?php if (($_SESSION['usuario']['rol'] ?? '') === 'admin'): ?>
                                 <a class="btn btn-warning" href="index.php?controller=Admin&action=index">Panel de administración</a>
