@@ -143,4 +143,31 @@ class PedidoController
 
         require __DIR__ . '/../view/main.php';
     }
+
+    public function historial(): void
+    {
+        // Aseguramos que la sesión esté activa para leer al usuario logueado.
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Si no hay usuario en sesión redirigimos al login para proteger el historial.
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: index.php?controller=Usuario&action=login');
+            exit;
+        }
+
+        $idUsuario = $_SESSION['usuario']['id_usuario']
+            ?? $_SESSION['usuario']['id'];
+
+        // Obtenemos todos los pedidos de este usuario.
+        $pedidos = PedidoDAO::obtenerPedidosPorUsuario((int)$idUsuario);
+
+        // Preparamos datos para la vista.
+        $view = __DIR__ . '/../view/pedido/historial.php';
+        $pageTitle = 'Mi historial de pedidos | Porscheats';
+        $navClass = 'estilo_negro';
+
+        require __DIR__ . '/../view/main.php';
+    }
 }

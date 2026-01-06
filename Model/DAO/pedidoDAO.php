@@ -37,5 +37,30 @@ class PedidoDAO
         // Este ID se usará justo tras crear el pedido para insertar cada línea en lineapedido con ese id_pedido.
         return $idPedido;
     }
+
+    /**
+     * Devuelve todos los pedidos de un usuario ordenados del más reciente al más antiguo.
+     */
+    public static function obtenerPedidosPorUsuario(int $idUsuario): array
+    {
+        $con = DataBase::connect();
+
+        $sql = 'SELECT id_pedido, fecha_pedido, estado, importe_total
+                FROM pedido
+                WHERE id_usuario = ?
+                ORDER BY fecha_pedido DESC';
+
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param('i', $idUsuario);
+        $stmt->execute();
+
+        $resultado = $stmt->get_result();
+        $pedidos = $resultado->fetch_all(MYSQLI_ASSOC);
+
+        $stmt->close();
+        $con->close();
+
+        return $pedidos;
+    }
 }
 
