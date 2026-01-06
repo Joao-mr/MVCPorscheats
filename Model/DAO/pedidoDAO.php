@@ -62,5 +62,24 @@ class PedidoDAO
 
         return $pedidos;
     }
+
+    /**
+     * Devuelve todos los pedidos ordenados del más reciente al más antiguo.
+     */
+    public static function obtenerTodos(): array
+    {
+        $con = DataBase::connect();
+        $sql = 'SELECT * FROM pedido ORDER BY fecha_pedido DESC';
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+
+        $resultado = $stmt->get_result();
+        $pedidos = $resultado->fetch_all(MYSQLI_ASSOC);
+
+        $stmt->close();
+        $con->close();
+
+        return $pedidos;
+    }
 }
 

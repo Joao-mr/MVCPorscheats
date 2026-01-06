@@ -45,4 +45,38 @@ class UsuarioDAO {
         return $usuario;
     }
 
+    public static function obtenerTodos(): array
+    {
+        $con = DataBase::connect();
+        $sql = "SELECT id_usuario, nombre, apellidos, email, rol, fecha_registro
+                FROM usuario
+                ORDER BY fecha_registro DESC";
+
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+
+        $resultado = $stmt->get_result();
+        $usuarios = $resultado->fetch_all(MYSQLI_ASSOC);
+
+        $stmt->close();
+        $con->close();
+
+        return $usuarios;
+    }
+
+    public static function updateRol(int $idUsuario, string $rol): bool
+    {
+        $con = DataBase::connect();
+        $sql = "UPDATE usuario SET rol = ? WHERE id_usuario = ?";
+
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("si", $rol, $idUsuario);
+        $ok = $stmt->execute();
+
+        $stmt->close();
+        $con->close();
+
+        return $ok;
+    }
+
 }

@@ -21,7 +21,12 @@ require_once __DIR__ . '/database/database.php';
 if (isset($_GET['controller'])) {
 
     $controllerName = $_GET['controller'] . "Controller";
-    $controllerFile = "controller/" . $controllerName . ".php";
+    if (str_starts_with($controllerName, 'API')) {
+        $controllerFile = "controller/API/" . $controllerName . ".php";
+    } else {
+        $controllerFile = "controller/" . $controllerName . ".php";
+    }
+
 
     // Verificar si existe el archivo del controlador
     if (file_exists($controllerFile)) {
