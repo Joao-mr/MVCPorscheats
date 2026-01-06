@@ -58,7 +58,7 @@ class APIPedidoController extends APIController
         }
 
         $estado = strtolower($data['estado']);
-        $permitidos = ['pendiente', 'enviado', 'cancelado'];
+        $permitidos = ['pendiente', 'pagado', 'entregado', 'cancelado'];
 
         if (!in_array($estado, $permitidos, true)) {
             $this->respondError('Estado no permitido');

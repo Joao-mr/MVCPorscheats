@@ -15,6 +15,11 @@ $footer = __DIR__ . '/partials/footer.php';
 
     <!-- CSS -->
     <link rel="stylesheet" href="public/css/main.css?v=<?= time(); ?>">
+    
+    <?php if (isset($view) && str_contains($view, 'admin')): ?>
+        <link rel="stylesheet" href="public/css/admin.css?v=<?= time(); ?>">
+    <?php endif; ?>
+
 </head>
 <body>
 
@@ -48,6 +53,11 @@ $footer = __DIR__ . '/partials/footer.php';
             <script src="public/js/pedido.js"></script>
         <?php endif; ?>
 
+        <?php if (isset($view) && str_contains($view, 'admin')): ?>
+            <script src="public/js/admin/index.js"></script>
+            <script src="public/js/admin/pedido.js"></script>
+            <script src="public/js/admin/producto.js"></script>
+        <?php endif; ?>
 
 </body> 
 </html>

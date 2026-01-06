@@ -52,7 +52,7 @@ class APIProductoController extends APIController
             $producto = ProductoDAO::getProductoByID((int) $_GET['id']);
 
             if ($producto) {
-                $this->respondOk($producto);
+                $this->respondOk($this->serializeProducto($producto));
             } else {
                 $this->respondError('Producto no encontrado');
             }
@@ -60,7 +60,41 @@ class APIProductoController extends APIController
         }
 
         $productos = ProductoDAO::getProductos();
-        $this->respondOk($productos);
+        $data = array_map([$this, 'serializeProducto'], $productos);
+        $this->respondOk($data);
+    }
+
+    /**
+     * Convierte el objeto Producto en un array público para JSON.
+     */
+    private function serializeProducto($producto): array
+    {
+        // Si ya viene como array (por seguridad)
+        if (is_array($producto)) {
+            return $producto;
+        }
+
+        return [
+            'id_producto'     => method_exists($producto, 'getId_producto') 
+                                    ? $producto->getId_producto() 
+                                    : nullnull,
+
+            'nombre_producto' => method_exists($producto, 'getNombre') 
+                                    ? $producto->getNombre() 
+                                    : '',
+
+            'precio_producto' => method_exists($producto, 'getPrecio_unidad') 
+                                    ? (float) $producto->getPrecio_unidad() 
+                                    : 0,
+
+            'categoria'       => method_exists($producto, 'getCategoria') 
+                                    ? $producto->getCategoria() 
+                                    : '',
+
+            'descripcion'     => method_exists($producto, 'getDescripcion') 
+                                    ? $producto->getDescripcion() 
+                                    : ''
+        ];
     }
 
     /**
@@ -97,7 +131,11 @@ class APIProductoController extends APIController
             return;
         }
 
-        $this->productoDAO->update($data['id'], $data);
+        if (!$this->productoDAO->update($data)) {
+            $this->respondError('No se pudo actualizar');
+            return;
+        }
+
         $this->respondMessage('Producto actualizado');
     }
 

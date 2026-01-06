@@ -99,7 +99,7 @@ $isAdmin  = $isLogged && (($_SESSION['usuario']['rol'] ?? '') === 'admin');
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="index.php?controller=Pedido&action=cesta">Carrito</a>
+                <a class="nav-link text-white" href="index.php?controller=Pedido&action=carrito">Carrito</a>
             </li>
 
             <?php if ($isLogged): ?>

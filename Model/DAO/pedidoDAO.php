@@ -81,5 +81,22 @@ class PedidoDAO
 
         return $pedidos;
     }
+
+    public static function updateEstado(int $idPedido, string $estado): bool
+    {
+        $con = DataBase::connect();
+
+        $sql = "UPDATE pedido SET estado = ? WHERE id_pedido = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param('si', $estado, $idPedido);
+
+        $ok = $stmt->execute();
+
+        $stmt->close();
+        $con->close();
+
+        return $ok;
+    }
+
 }
 
