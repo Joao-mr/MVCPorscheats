@@ -17,21 +17,33 @@ class LineaPedidoDAO
 
         // Preparamos el statement y vinculamos los parámetros.
         $stmt = $con->prepare($sql);
+        $idPedido = $linea->getId_pedido();
+        $idProducto = $linea->getId_producto();
+        $cantidad = $linea->getCantidad();
+        $precioUnidad = $linea->getPrecio_unidad();
+        $porcentaje = $linea->getPorcentaje_descuento();
+        $precioFinal = $linea->getPrecio_final_unidad();
+        $subtotal = $linea->getSubtotal();
+
         $stmt->bind_param(
-            'iiidddd',
-            $linea->getId_pedido(),
-            $linea->getId_producto(),
-            $linea->getCantidad(),
-            $linea->getPrecio_unidad(),
-            $linea->getPorcentaje_descuento(),
-            $linea->getPrecio_final_unidad(),
-            $linea->getSubtotal()
+            'iiddidd',
+            $idPedido,
+            $idProducto,
+            $cantidad,
+            $precioUnidad,
+            $porcentaje,
+            $precioFinal,
+            $subtotal
         );
 
         // Ejecutamos la consulta.
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $error = $stmt->error;
+            $stmt->close();
+            $con->close();
+            throw new RuntimeException('Error al insertar línea de pedido: ' . $error);
+        }
 
-        // Guardamos el ID generado y cerramos recursos.
         $idInsertado = $stmt->insert_id;
         $stmt->close();
         $con->close();

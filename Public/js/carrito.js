@@ -168,18 +168,29 @@ document.addEventListener('DOMContentLoaded', () => {
     function actualizarTotales() {
         const carrito = obtenerCarrito();
 
-        // Subtotal: suma de precio*cantidad de cada producto.
-        const subtotal = carrito.reduce(
-            (total, item) => total + Number(item.precio) * Number(item.cantidad),
-            0
-        );
+        let subtotal = 0;
+        let totalProductos = 0;
 
-        const descuento = subtotal * tasaDescuento; // Desc = subtotal * porcentaje
-        const total = subtotal - descuento;         // Total = subtotal - descuento
+        carrito.forEach(producto => {
+            const cantidad = Number(producto.cantidad) || 0;
+            const precio = Number(producto.precio) || 0;
+            subtotal += precio * cantidad;
+            totalProductos += cantidad;
+        });
 
-        subtotalEl.textContent  = subtotal.toFixed(2)  + ' €';
+        let descuento = 0;
+
+        if (totalProductos >= 3) {
+            descuento = subtotal * 0.10;
+        } else {
+            descuento = subtotal * tasaDescuento;
+        }
+
+        const total = subtotal - descuento;
+
+        subtotalEl.textContent = subtotal.toFixed(2) + ' €';
         descuentoEl.textContent = `-${descuento.toFixed(2)} €`;
-        totalEl.textContent     = total.toFixed(2)     + ' €';
+        totalEl.textContent = total.toFixed(2) + ' €';
     }
 
     /**

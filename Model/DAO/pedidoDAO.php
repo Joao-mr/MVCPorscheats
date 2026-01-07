@@ -26,9 +26,13 @@ class PedidoDAO
             $pedido->getImporte_total()
         );
 
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $error = $stmt->error;
+            $stmt->close();
+            $con->close();
+            throw new RuntimeException('Error al crear pedido: ' . $error);
+        }
 
-        // Devolvemos el ID autogenerado para poder enlazarlo después con sus líneas de pedido.
         $idPedido = $stmt->insert_id;
 
         $stmt->close();

@@ -3,6 +3,7 @@ require_once __DIR__ . '/../model/DAO/pedidoDAO.php';
 require_once __DIR__ . '/../model/DAO/lineaPedidoDAO.php';
 require_once __DIR__ . '/../model/Pedido.php';
 require_once __DIR__ . '/../model/LineaPedido.php';
+require_once __DIR__ . '/../model/DAO/ofertaDAO.php';
 
 class PedidoController
 {
@@ -60,16 +61,28 @@ class PedidoController
             exit;
         }
 
+        $totalProductos = 0;
+        $subtotal = 0.0;
+
+        foreach ($payload['carrito'] as $producto) {
+            $cantidad = (int)($producto['cantidad'] ?? 0);
+            $precio = (float)($producto['precio'] ?? 0);
+            $totalProductos += $cantidad;
+            $subtotal += $cantidad * $precio;
+        }
+
+        $resultadoOferta = OfertaDAO::calcularDescuento($totalProductos, $subtotal);
+
         try {
             // Construimos el objeto Pedido con los datos mínimos.
             $pedido = new Pedido();
             $pedido->setId_usuario($idUsuario);
-            $pedido->setId_oferta($payload['id_oferta'] ?? null);
+            $pedido->setId_oferta($resultadoOferta['aplica'] ? 1 : null); // ajusta si guardas el id real
+            $pedido->setImporte_total($resultadoOferta['total']);
             $pedido->setFecha_pedido(date('Y-m-d H:i:s'));
             $pedido->setMetodo_pago($payload['metodo_pago'] ?? 'tarjeta');
             $pedido->setDireccion_entrega($payload['direccion_entrega'] ?? 'Por definir');
             $pedido->setEstado('pendiente');
-            $pedido->setImporte_total($payload['subtotal'] ?? 0);
 
             // Guardamos el pedido y guardamos el ID generado para enlazar las líneas.
             $idPedido = PedidoDAO::crearPedido($pedido);
@@ -95,7 +108,13 @@ class PedidoController
                 ob_end_clean();
             }
             http_response_code(200);
-            echo json_encode(['status' => 'ok', 'idPedido' => $idPedido]);
+            echo json_encode([
+                'status' => 'ok',
+                'idPedido' => $idPedido,
+                'subtotal' => round($subtotal, 2),
+                'descuento' => $resultadoOferta['descuento'],
+                'total' => $resultadoOferta['total'],
+            ]);
             exit;
         } catch (Throwable $e) {
             error_log($e->getMessage());
