@@ -63,6 +63,22 @@
                 <button id="toggleCrearProducto" type="button" class="btn-secondary">+ Nuevo producto</button>
             </header>
 
+            <div id="currencyPanel"
+                 class="panel-card currency-panel"
+                 data-api-key="<?= htmlspecialchars(getenv('FREECURRENCY_API_KEY') ?: '', ENT_QUOTES, 'UTF-8') ?>">
+                <div class="currency-panel__content">
+                    <label for="currencySelector">Moneda</label>
+                    <select id="currencySelector">
+                        <option value="EUR" selected>EUR (€)</option>
+                        <option value="USD">USD ($)</option>
+                        <option value="GBP">GBP (£)</option>
+                        <option value="MXN">MXN ($)</option>
+                    </select>
+                    <p id="currencyRateInfo" class="currency-rate-info">1 € = 1.000 EUR</p>
+                </div>
+
+            </div>
+
             <div id="productoCrearWrapper" class="panel-card">
                 <form id="formProductoCrear" class="form-grid">
                     <label>Nombre

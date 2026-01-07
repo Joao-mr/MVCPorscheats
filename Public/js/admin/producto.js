@@ -1,3 +1,7 @@
+const FREECURRENCY_API_URL = 'https://api.freecurrencyapi.com/v1/latest';
+const FREECURRENCY_DEFAULTS = { EUR: 1, USD: 1.09, GBP: 0.86, MXN: 18.5 };
+const DEFAULT_API_KEY = 'fca_live_MJ4Fr0zs3hhXPevkGRZioVd1LghISfz5Bpjmz65J';
+
 // Servicio responsable de todo el CRUD de productos en el panel.
 class ProductoService {
     constructor(apiUrl, tableSelector, formCrearSelector, formEditarSelector) {
@@ -6,6 +10,8 @@ class ProductoService {
         this.formCrearSelector = formCrearSelector;
         this.formEditarSelector = formEditarSelector;
         this.productos = [];
+        this.currencyRates = { ...FREECURRENCY_DEFAULTS };
+        this.currentCurrency = 'EUR';
     }
 
     // Punto de entrada: cachea elementos, enlaza eventos y carga productos iniciales.
@@ -14,6 +20,7 @@ class ProductoService {
         this.bindEvents();
         this.toggleCrearForm(true);
         this.loadProductos();
+        this.loadExchangeRates();
     }
 
     // Referencias del DOM usadas en todo el servicio.
@@ -26,6 +33,9 @@ class ProductoService {
         this.editarWrapper = document.getElementById('productoEditarWrapper');
         this.btnToggleCrear = document.getElementById('toggleCrearProducto');
         this.btnCerrarEditar = document.getElementById('cerrarEditarProducto');
+        this.currencyPanel = document.getElementById('currencyPanel');
+        this.currencySelect = document.getElementById('currencySelector');
+        this.currencyInfo = document.getElementById('currencyRateInfo');
     }
 
     // Eventos principales: submit de formularios y clicks en la tabla.
@@ -57,13 +67,18 @@ class ProductoService {
 
         this.btnToggleCrear?.addEventListener('click', () => this.toggleCrearForm());
         this.btnCerrarEditar?.addEventListener('click', () => this.hideEditarForm());
+        this.currencySelect?.addEventListener('change', () => {
+            this.currentCurrency = this.currencySelect.value;
+            this.updateCurrencyInfo();
+            this.renderProductos();
+        });
     }
 
     // Descarga los productos de la API y refresca la tabla.
     async loadProductos() {
         const datos = await this.fetchProductos();
         this.productos = datos.map((item) => this.normalizeProducto(item));
-        this.renderProductos(this.productos);
+        this.renderProductos();
     }
 
     // Fetch sencillo (GET) que devuelve un array o [] en caso de error.
@@ -99,21 +114,33 @@ class ProductoService {
     }
 
     // Dibuja la tabla usando map() y deja data-id preparado para los botones.
-    renderProductos(productos) {
+    renderProductos(productos = this.productos) {
         if (!this.tbody) return;
 
-        const rows = productos.map((producto) => `
-            <tr>
-                <td>${producto.id}</td>
-                <td>${producto.nombre || 'Sin nombre'}</td>
-                <td>${producto.precio.toFixed(2)} €</td>
-                <td>${producto.categoria || '—'}</td>
-                <td class="product-actions">
-                    <button class="btn-editar" data-id="${producto.id}">Editar</button>
-                    <button class="btn-eliminar" data-id="${producto.id}">Eliminar</button>
-                </td>
-            </tr>
-        `).join('');
+        const currency = this.currentCurrency;
+        const rate = this.getSelectedRate();
+
+        const rows = productos.map((producto) => {
+            const precioBase = producto.precio.toFixed(2);
+            const precioConvertido = (producto.precio * rate).toFixed(2);
+
+            return `
+                <tr>
+                    <td>${producto.id}</td>
+                    <td>${producto.nombre || 'Sin nombre'}</td>
+                    <td>
+                        ${precioBase} €
+                        <br>
+                        <small>${precioConvertido} ${currency}</small>
+                    </td>
+                    <td>${producto.categoria || '—'}</td>
+                    <td class="product-actions">
+                        <button class="btn-editar" data-id="${producto.id}">Editar</button>
+                        <button class="btn-eliminar" data-id="${producto.id}">Eliminar</button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
 
         this.tbody.innerHTML = rows || '<tr><td colspan="5">No hay productos disponibles.</td></tr>';
     }
@@ -244,6 +271,42 @@ class ProductoService {
     hideEditarForm() {
         this.editarWrapper?.classList.add('is-hidden');
         this.formEditar?.reset();
+    }
+
+    // Nuevos métodos para manejo de divisas
+    async loadExchangeRates() {
+        const apiKey = this.currencyPanel?.dataset.apiKey || '';
+
+        if (!apiKey) {
+            this.updateCurrencyInfo();
+            return;
+        }
+
+        try {
+            const monedas = ['USD', 'GBP', 'MXN'];
+            const url = `${FREECURRENCY_API_URL}?apikey=${encodeURIComponent(apiKey)}&base_currency=EUR&currencies=${monedas.join(',')}`;
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`API currency ${response.status}`);
+            const json = await response.json();
+            const data = json?.data || {};
+            this.currencyRates = { EUR: 1, ...FREECURRENCY_DEFAULTS, ...data };
+        } catch (error) {
+            console.warn('No se pudieron cargar divisas, usando valores por defecto.', error);
+            this.currencyRates = { ...FREECURRENCY_DEFAULTS };
+        } finally {
+            this.updateCurrencyInfo();
+            this.renderProductos();
+        }
+    }
+
+    getSelectedRate() {
+        return this.currencyRates?.[this.currentCurrency] ?? 1;
+    }
+
+    updateCurrencyInfo() {
+        if (!this.currencyInfo) return;
+        const rate = this.getSelectedRate();
+        this.currencyInfo.textContent = `1 € = ${rate.toFixed(3)} ${this.currentCurrency}`;
     }
 }
 
