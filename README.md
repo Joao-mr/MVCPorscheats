@@ -213,4 +213,3 @@ Dependiendo de cómo estén definidos tus métodos en los controladores, algunas
   3. Crea o modifica la vista que mostrará esa información.
   4. Accede desde el navegador usando `?controller=TuControlador&action=TuAccion`.
 
-Este README busca explicar tu proyecto de manera clara, sencilla y humana, para que cualquier persona (incluido tu profesor/a) pueda entender qué hace, cómo está organizado y cómo se ejecuta.
