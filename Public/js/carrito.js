@@ -1,11 +1,13 @@
-// Esperamos a que el DOM esté listo para asegurar que #cartItems existe.
+// Módulo del carrito: gestiona render, promo y navegación desde localStorage.
 document.addEventListener('DOMContentLoaded', () => {
     /**
-     * --- VARIABLES GLOBALES DEL MÓDULO ---
      * CLAVE_CARRITO: nombre con el que guardamos el array en localStorage.
-     * Referencias a nodos del DOM que usamos muchas veces para evitar buscarlos de nuevo.
+     * CODIGO_PROMO: código estático permitido para descuentos manuales.
+     * Referencias a nodos del DOM que usamos varias veces.
      */
     const CLAVE_CARRITO = 'carrito';
+    const CODIGO_PROMO = 'PORSCHE10';
+
     const listaProductos = document.getElementById('cartItems');
     const subtotalEl     = document.getElementById('subtotal');
     const descuentoEl    = document.getElementById('discount');
@@ -16,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnFinalizar   = document.getElementById('finalizarPedido');
     const btnVaciar      = document.getElementById('vaciarCarrito');
 
-    let tasaDescuento = 0; // Guardará el porcentaje de descuento activo (0 = sin promo).
+    let tasaDescuento = 0; // Guarda el porcentaje de descuento activo (0 = sin promo).
 
     iniciar();
 
@@ -42,10 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btnVaciar?.addEventListener('click', vaciarCarrito);
     }
 
-    // ==========================
-    //   LOCALSTORAGE UTILITIES
-    // ==========================
-
     /**
      * Obtiene el carrito guardado. Si no existe o hay error,
      * devolvemos un array vacío para no romper el flujo.
@@ -65,9 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
     }
 
-    // ==========================
-    //   RENDERIZAR PRODUCTOS
-    // ==========================
 
     /**
      * Decide qué mostrar en el <ul>: lista de productos o mensaje de vacío.
@@ -91,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Muestra un único <li> indicando que no hay productos.
      */
     function mostrarCarritoVacio() {
+        if (!listaProductos) return;
         listaProductos.innerHTML = `
             <li class="list-group-item text-center text-muted py-4">
                 El carrito está vacío
@@ -120,13 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return li;
     }
 
-    // ==========================
-    //   ACCIONES DE LA LISTA
-    // ==========================
 
     /**
      * Delegamos los clicks dentro del <ul> para identificar si se pulsó “Eliminar”.
-
      */
     function manejarClickLista(evento) {
         if (evento.target.dataset.accion === 'eliminar') {
@@ -157,17 +149,15 @@ document.addEventListener('DOMContentLoaded', () => {
         actualizarTotales();                    // totales a 0
     }
 
-    // ==========================
-    //   TOTALES Y PROMOS
-    // ==========================
 
     /**
      * Calcula subtotal, descuento y total basándose en el carrito actual
      * y en la tasa de descuento aplicada.
      */
     function actualizarTotales() {
-        const carrito = obtenerCarrito();
+        if (!subtotalEl || !descuentoEl || !totalEl) return;
 
+        const carrito = obtenerCarrito();
         let subtotal = 0;
         let totalProductos = 0;
 
@@ -178,19 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
             totalProductos += cantidad;
         });
 
-        let descuento = 0;
-
-        if (totalProductos >= 3) {
-            descuento = subtotal * 0.10;
-        } else {
-            descuento = subtotal * tasaDescuento;
-        }
+        const descuento = totalProductos >= 3
+            ? subtotal * 0.10
+            : subtotal * tasaDescuento;
 
         const total = subtotal - descuento;
 
-        subtotalEl.textContent = subtotal.toFixed(2) + ' €';
+        subtotalEl.textContent = `${subtotal.toFixed(2)} €`;
         descuentoEl.textContent = `-${descuento.toFixed(2)} €`;
-        totalEl.textContent = total.toFixed(2) + ' €';
+        totalEl.textContent = `${total.toFixed(2)} €`;
     }
 
     /**
@@ -200,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function aplicarCodigoPromocional() {
         const codigo = (promoInput?.value || '').trim().toUpperCase();
 
-        if (codigo === 'PORSCHE10') {
+        if (codigo === CODIGO_PROMO) {
             tasaDescuento = 0.10;
             promoMsg.textContent = 'Código aplicado: 10% de descuento.';
         } else {
@@ -210,10 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         actualizarTotales();
     }
-
-    // ==========================
-    //   FINALIZAR PEDIDO
-    // ==========================
 
     /**
      * Antes de redirigir verificamos si el carrito tiene productos.

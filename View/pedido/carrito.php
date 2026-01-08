@@ -1,11 +1,10 @@
 <section class="container py-5">
-
-    <!-- Título -->
+    <!-- Título principal -->
     <h1 class="mb-4">Carrito</h1>
 
     <div class="row g-4">
 
-        <!-- Columna izquierda -->
+        <!-- Columna izquierda: código promocional y lista de productos -->
         <div class="col-lg-8">
 
             <!-- Código promocional -->
@@ -18,11 +17,12 @@
                         <button class="btn btn-dark" id="applyPromo">Aplicar</button>
                     </div>
 
+                    <!-- Mensaje dinámico del resultado de aplicar el código -->
                     <small id="promoMessage" class="text-muted mt-2 d-block"></small>
                 </div>
             </div>
 
-            <!-- Lista de productos --> 
+            <!-- Lista de productos (rellena mediante JS) -->
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title mb-3">Productos</h5>
@@ -35,9 +35,8 @@
 
         </div>
 
-        <!-- Columna derecha -->
+        <!-- Columna derecha: resumen del pedido -->
         <div class="col-lg-4">
-
             <div class="card sticky-top" style="top:120px">
                 <div class="card-body">
                     <h5 class="card-title mb-3">Resumen</h5>
@@ -59,12 +58,12 @@
                         <span id="total">0.00 €</span>
                     </div>
 
+                    <!-- CTA hacia la vista de confirmación -->
                     <a href="index.php?controller=Pedido&action=confirmarVista" class="btn btn-dark w-100">
                         Finalizar compra
                     </a>
                 </div>
             </div>
-
         </div>
 
     </div>

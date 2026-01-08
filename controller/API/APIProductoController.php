@@ -3,7 +3,7 @@ require_once __DIR__ . '/APIController.php';
 require_once __DIR__ . '/../../model/DAO/ProductoDAO.php';
 
 /**
- * API sencilla para consultar productos.
+ * API para consultar y administrar productos.
  */
 class APIProductoController extends APIController
 {
@@ -69,37 +69,32 @@ class APIProductoController extends APIController
      */
     private function serializeProducto($producto): array
     {
-        // Si ya viene como array (por seguridad)
         if (is_array($producto)) {
             return $producto;
         }
 
         return [
-            'id_producto'     => method_exists($producto, 'getId_producto') 
-                                    ? $producto->getId_producto() 
-                                    : null,
-
-            'nombre_producto' => method_exists($producto, 'getNombre') 
-                                    ? $producto->getNombre() 
-                                    : '',
-
-            'precio_producto' => method_exists($producto, 'getPrecio_unidad') 
-                                    ? (float) $producto->getPrecio_unidad() 
-                                    : 0,
-
-            'categoria'       => method_exists($producto, 'getCategoria') 
-                                    ? $producto->getCategoria() 
-                                    : '',
-
-            'descripcion'     => method_exists($producto, 'getDescripcion') 
-                                    ? $producto->getDescripcion() 
-                                    : ''
+            'id_producto'     => method_exists($producto, 'getId_producto')
+                ? $producto->getId_producto()
+                : null,
+            'nombre_producto' => method_exists($producto, 'getNombre')
+                ? $producto->getNombre()
+                : '',
+            'precio_producto' => method_exists($producto, 'getPrecio_unidad')
+                ? (float) $producto->getPrecio_unidad()
+                : 0,
+            'categoria'       => method_exists($producto, 'getCategoria')
+                ? $producto->getCategoria()
+                : '',
+            'descripcion'     => method_exists($producto, 'getDescripcion')
+                ? $producto->getDescripcion()
+                : ''
         ];
+        }
     }
 
     /**
-     * Maneja solicitudes POST:
-     * - Lee el cuerpo JSON y crea un nuevo producto.
+     * Maneja solicitudes POST creando un nuevo producto.
      */
     private function handlePost()
     {
@@ -111,15 +106,12 @@ class APIProductoController extends APIController
             return;
         }
 
-        // Crear el producto usando el DAO existente.
         $this->productoDAO->create($data);
-
         $this->respondMessage('Producto creado');
     }
 
     /**
-     * Maneja solicitudes PUT:
-     * - Lee el cuerpo JSON y actualiza un producto existente.
+     * Maneja solicitudes PUT actualizando un producto existente.
      */
     private function handlePut()
     {
@@ -140,8 +132,7 @@ class APIProductoController extends APIController
     }
 
     /**
-     * Maneja solicitudes DELETE:
-     * - Elimina un producto por su ID (en la query string).
+     * Maneja solicitudes DELETE eliminando un producto por ID.
      */
     private function handleDelete()
     {
@@ -155,9 +146,7 @@ class APIProductoController extends APIController
     }
 
     /**
-     * Envía una respuesta exitosa.
-     *
-     * @param mixed $data
+     * Envía respuesta exitosa con datos.
      */
     private function respondOk($data)
     {
@@ -168,9 +157,7 @@ class APIProductoController extends APIController
     }
 
     /**
-     * Envía una respuesta de error simple.
-     *
-     * @param string $message
+     * Envía respuesta de error.
      */
     private function respondError($message)
     {
@@ -181,9 +168,7 @@ class APIProductoController extends APIController
     }
 
     /**
-     * Envía una respuesta con solo mensaje.
-     *
-     * @param string $message
+     * Envía respuesta con mensaje plano.
      */
     private function respondMessage($message)
     {

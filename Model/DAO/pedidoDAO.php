@@ -3,9 +3,14 @@
 require_once __DIR__ . '/../Pedido.php';
 require_once __DIR__ . '/../../database/database.php';
 
+/**
+ * DAO encargado de operaciones CRUD básicas sobre la tabla pedido.
+ */
 class PedidoDAO
 {
-    
+    /**
+     * Inserta un pedido y devuelve el ID autogenerado.
+     */
     public static function crearPedido(Pedido $pedido): int
     {
         $con = DataBase::connect();
@@ -38,7 +43,7 @@ class PedidoDAO
         $stmt->close();
         $con->close();
 
-        // Este ID se usará justo tras crear el pedido para insertar cada línea en lineapedido con ese id_pedido.
+        // Este ID se utilizará para registrar las líneas del pedido.
         return $idPedido;
     }
 
@@ -73,6 +78,7 @@ class PedidoDAO
     public static function obtenerTodos(): array
     {
         $con = DataBase::connect();
+
         $sql = 'SELECT * FROM pedido ORDER BY fecha_pedido DESC';
         $stmt = $con->prepare($sql);
         $stmt->execute();
@@ -86,11 +92,14 @@ class PedidoDAO
         return $pedidos;
     }
 
+    /**
+     * Actualiza el estado de un pedido concreto.
+     */
     public static function updateEstado(int $idPedido, string $estado): bool
     {
         $con = DataBase::connect();
 
-        $sql = "UPDATE pedido SET estado = ? WHERE id_pedido = ?";
+        $sql = 'UPDATE pedido SET estado = ? WHERE id_pedido = ?';
         $stmt = $con->prepare($sql);
         $stmt->bind_param('si', $estado, $idPedido);
 
@@ -101,6 +110,5 @@ class PedidoDAO
 
         return $ok;
     }
-
 }
 

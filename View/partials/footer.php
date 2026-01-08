@@ -1,6 +1,7 @@
 <footer class="footer bg-black text-white mt-5">
     <div class="container py-5">
         <div class="row g-4">
+            <!-- Selector de región/idioma -->
             <div class="col-md-4">
                 <p class="text-uppercase small mb-2">Región / Idioma Actual</p>
                 <div class="d-flex align-items-center gap-2">
@@ -9,12 +10,14 @@
                 </div>
             </div>
 
+            <!-- Información de contacto -->
             <div class="col-md-4">
                 <h6 class="text-uppercase">Ubicación y contacto</h6>
                 <p class="text-white-50 mb-3">¿Preguntas?</p>
                 <a href="#" class="btn btn-outline-light btn-sm px-4">Ponte en contacto con</a>
             </div>
 
+            <!-- Redes sociales -->
             <div class="col-md-4">
                 <h6 class="text-uppercase">Redes Sociales</h6>
                 <p class="text-white-50">Ponte en contacto con nosotros a través de las redes sociales.</p>

@@ -2,12 +2,17 @@
     <nav class="admin-sidebar">
         <h1 class="admin-title">Panel de Administración</h1>
         <ul class="admin-menu">
-            <li><button class="menu-btn active" data-section="dashboard">Dashboard (Pedidos)</button></li>
-            <li><button class="menu-btn" data-section="productos">Productos</button></li>
+            <li>
+                <button class="menu-btn active" data-section="dashboard">Dashboard (Pedidos)</button>
+            </li>
+            <li>
+                <button class="menu-btn" data-section="productos">Productos</button>
+            </li>
         </ul>
     </nav>
 
     <main class="admin-content">
+        <!-- Sección de pedidos / dashboard -->
         <section id="dashboard" class="admin-section visible">
             <header class="section-header">
                 <div>
@@ -47,13 +52,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="5">Cargando pedidos...</td></tr>
+                            <tr>
+                                <td colspan="5">Cargando pedidos...</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
 
+        <!-- Sección de productos -->
         <section id="productos" class="admin-section">
             <header class="section-header">
                 <div>
@@ -63,9 +71,11 @@
                 <button id="toggleCrearProducto" type="button" class="btn-secondary">+ Nuevo producto</button>
             </header>
 
-            <div id="currencyPanel"
-                 class="panel-card currency-panel"
-                 data-api-key="<?= htmlspecialchars(getenv('FREECURRENCY_API_KEY') ?: '', ENT_QUOTES, 'UTF-8') ?>">
+            <div
+                id="currencyPanel"
+                class="panel-card currency-panel"
+                data-api-key="<?= htmlspecialchars(getenv('FREECURRENCY_API_KEY') ?: '', ENT_QUOTES, 'UTF-8') ?>"
+            >
                 <div class="currency-panel__content">
                     <label for="currencySelector">Moneda</label>
                     <select id="currencySelector">
@@ -76,9 +86,9 @@
                     </select>
                     <p id="currencyRateInfo" class="currency-rate-info">1 € = 1.000 EUR</p>
                 </div>
-
             </div>
 
+            <!-- Formulario de alta -->
             <div id="productoCrearWrapper" class="panel-card">
                 <form id="formProductoCrear" class="form-grid">
                     <label>Nombre
@@ -105,6 +115,7 @@
                 </form>
             </div>
 
+            <!-- Formulario de edición (se muestra dinámicamente) -->
             <div id="productoEditarWrapper" class="panel-card is-hidden">
                 <div class="panel-card-header">
                     <h3>Editar producto</h3>
@@ -127,7 +138,6 @@
                             <option value="bebidas">Bebidas</option>
                         </select>
                     </label>
-
                     <label>Descripción
                         <textarea name="descripcion" rows="2" placeholder="Descripción breve"></textarea>
                     </label>
@@ -137,6 +147,7 @@
                 </form>
             </div>
 
+            <!-- Tabla de productos -->
             <div class="panel-card">
                 <div class="tabla-wrapper">
                     <table id="tablaProductos" class="admin-table">
@@ -150,7 +161,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="5">Cargando productos...</td></tr>
+                            <tr>
+                                <td colspan="5">Cargando productos...</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

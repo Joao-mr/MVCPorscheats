@@ -1,3 +1,4 @@
+<!-- Vista mostrada tras confirmar el pedido con éxito -->
 <div class="container py-5 text-center">
     <div class="card mx-auto shadow-sm" style="max-width:480px;">
         <div class="card-body">

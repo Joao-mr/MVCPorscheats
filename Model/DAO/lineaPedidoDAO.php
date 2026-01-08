@@ -3,20 +3,23 @@
 require_once __DIR__ . '/../LineaPedido.php';
 require_once __DIR__ . '/../../database/database.php';
 
+/**
+ * DAO para operaciones sobre la tabla lineapedido.
+ */
 class LineaPedidoDAO
 {
+    /**
+     * Inserta una línea de pedido y devuelve el ID generado.
+     */
     public static function insertarLineaPedido(LineaPedido $linea): int
     {
-        // Obtenemos la conexión mysqli.
-        $con = DataBase::connect();
+        $con = DataBase::connect(); // Conexión a la base de datos
 
-        // Definimos el INSERT con placeholders.
         $sql = 'INSERT INTO lineapedido 
                 (id_pedido, id_producto, cantidad, precio_unidad, porcentaje_descuento, precio_final_unidad, subtotal)
                 VALUES (?, ?, ?, ?, ?, ?, ?)';
 
-        // Preparamos el statement y vinculamos los parámetros.
-        $stmt = $con->prepare($sql);
+        $stmt = $con->prepare($sql); // Prepara sentencia segura
         $idPedido = $linea->getId_pedido();
         $idProducto = $linea->getId_producto();
         $cantidad = $linea->getCantidad();
@@ -25,6 +28,7 @@ class LineaPedidoDAO
         $precioFinal = $linea->getPrecio_final_unidad();
         $subtotal = $linea->getSubtotal();
 
+        // Vincula cada valor con su tipo correspondiente
         $stmt->bind_param(
             'iiddidd',
             $idPedido,
@@ -36,15 +40,14 @@ class LineaPedidoDAO
             $subtotal
         );
 
-        // Ejecutamos la consulta.
         if (!$stmt->execute()) {
-            $error = $stmt->error;
+            $error = $stmt->error; // Guarda el mensaje antes de cerrar
             $stmt->close();
             $con->close();
             throw new RuntimeException('Error al insertar línea de pedido: ' . $error);
         }
 
-        $idInsertado = $stmt->insert_id;
+        $idInsertado = $stmt->insert_id; // ID autogenerado de la fila creada
         $stmt->close();
         $con->close();
 

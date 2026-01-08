@@ -5,6 +5,9 @@ require_once __DIR__ . '/../model/Pedido.php';
 require_once __DIR__ . '/../model/LineaPedido.php';
 require_once __DIR__ . '/../model/DAO/ofertaDAO.php';
 
+/**
+ * Controlador responsable del flujo completo de pedidos (carrito, confirmación y vistas asociadas).
+ */
 class PedidoController
 {
     private PedidoDAO $pedidoDAO;
@@ -14,13 +17,16 @@ class PedidoController
         $this->pedidoDAO = new PedidoDAO();
     }
 
+    /**
+     * Muestra la vista del carrito de compra.
+     */
     public function carrito(): void
     {
         $view = __DIR__ . '/../view/pedido/carrito.php';
         $pageTitle = 'Carrito | Porscheats';
         $lineas = []; // $this->pedidoDAO->obtenerLineasCarrito($idUsuario);
         $navClass = 'estilo_negro';
-        
+
         if (!is_readable($view)) {
             throw new RuntimeException('No se encuentra la vista de carrito.');
         }
@@ -28,6 +34,9 @@ class PedidoController
         require __DIR__ . '/../view/main.php';
     }
 
+    /**
+     * Recibe el payload del carrito (AJAX) y registra el pedido con sus líneas.
+     */
     public function confirmar(): void
     {
         if (session_status() === PHP_SESSION_NONE) {
@@ -35,7 +44,7 @@ class PedidoController
         }
 
         if (!ob_get_level()) {
-            ob_start(); // sólo creamos el buffer si no lo había
+            ob_start();
         }
 
         header('Content-Type: application/json; charset=utf-8');
@@ -46,7 +55,7 @@ class PedidoController
 
         if (!$idUsuario) {
             if (ob_get_level()) {
-                ob_end_clean(); // sólo cerramos si realmente está abierto
+                ob_end_clean();
             }
             echo json_encode(['status' => 'login_required', 'message' => 'Usuario no autenticado.']);
             exit;
@@ -55,7 +64,7 @@ class PedidoController
         $payload = json_decode(file_get_contents('php://input'), true);
         if (!is_array($payload) || empty($payload['carrito'])) {
             if (ob_get_level()) {
-                ob_end_clean(); // sólo cerramos si realmente está abierto
+                ob_end_clean();
             }
             echo json_encode(['status' => 'error', 'message' => 'Carrito vacío o datos inválidos.']);
             exit;
@@ -77,17 +86,17 @@ class PedidoController
             // Construimos el objeto Pedido con los datos mínimos.
             $pedido = new Pedido();
             $pedido->setId_usuario($idUsuario);
-            $pedido->setId_oferta($resultadoOferta['aplica'] ? 1 : null); // ajusta si guardas el id real
+            $pedido->setId_oferta($resultadoOferta['aplica'] ? 1 : null); // Ajusta si guardas el ID real
             $pedido->setImporte_total($resultadoOferta['total']);
             $pedido->setFecha_pedido(date('Y-m-d H:i:s'));
             $pedido->setMetodo_pago($payload['metodo_pago'] ?? 'tarjeta');
             $pedido->setDireccion_entrega($payload['direccion_entrega'] ?? 'Por definir');
             $pedido->setEstado('pendiente');
 
-            // Guardamos el pedido y guardamos el ID generado para enlazar las líneas.
+            // Guardamos el pedido y capturamos el ID generado para enlazar las líneas.
             $idPedido = PedidoDAO::crearPedido($pedido);
 
-            // Recorremos cada producto del carrito para convertirlo en LineaPedido.
+            // Convertimos cada producto del carrito en una línea asociada al pedido.
             foreach ($payload['carrito'] as $producto) {
                 $linea = new LineaPedido();
                 $linea->setId_pedido($idPedido);
@@ -99,11 +108,9 @@ class PedidoController
                 $linea->setPrecio_final_unidad($precioFinal);
                 $linea->setSubtotal($precioFinal * $producto['cantidad']);
 
-                // Insertamos cada línea para que queden vinculadas al pedido confirmado.
                 LineaPedidoDAO::insertarLineaPedido($linea);
             }
 
-            // Respondemos al frontend con un estado simple.
             if (ob_get_level()) {
                 ob_end_clean();
             }
@@ -127,6 +134,9 @@ class PedidoController
         }
     }
 
+    /**
+     * Renderiza la vista de confirmación previa (formulario de datos).
+     */
     public function confirmarVista(): void
     {
         $view = __DIR__ . '/../view/pedido/confirmar.php';
@@ -146,10 +156,12 @@ class PedidoController
             exit;
         }
 
-
         require __DIR__ . '/../view/main.php';
     }
 
+    /**
+     * Página de éxito tras confirmar un pedido.
+     */
     public function exito(): void
     {
         $view = __DIR__ . '/../view/pedido/exito.php';
@@ -163,14 +175,15 @@ class PedidoController
         require __DIR__ . '/../view/main.php';
     }
 
+    /**
+     * Listado de pedidos del usuario autenticado.
+     */
     public function historial(): void
     {
-        // Aseguramos que la sesión esté activa para leer al usuario logueado.
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // Si no hay usuario en sesión redirigimos al login para proteger el historial.
         if (!isset($_SESSION['usuario'])) {
             header('Location: index.php?controller=Usuario&action=login');
             exit;
@@ -179,10 +192,8 @@ class PedidoController
         $idUsuario = $_SESSION['usuario']['id_usuario']
             ?? $_SESSION['usuario']['id'];
 
-        // Obtenemos todos los pedidos de este usuario.
         $pedidos = PedidoDAO::obtenerPedidosPorUsuario((int)$idUsuario);
 
-        // Preparamos datos para la vista.
         $view = __DIR__ . '/../view/pedido/historial.php';
         $pageTitle = 'Mi historial de pedidos | Porscheats';
         $navClass = 'estilo_negro';

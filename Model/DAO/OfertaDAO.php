@@ -1,13 +1,16 @@
 <?php
 require_once __DIR__ . '/../../database/database.php';
+
 class OfertaDAO
 {
-    // Regla fija (simple)
+    // Cantidad mínima de productos para activar la oferta.
     private const CANTIDAD_MINIMA = 3;
-    private const PORCENTAJE = 0.10; // 10%
+
+    // Porcentaje fijo aplicado cuando se cumple la cantidad mínima.
+    private const PORCENTAJE = 0.10;
 
     /**
-     * Devuelve la oferta activa (muy simple)
+     * Devuelve la configuración activa de la oferta.
      */
     public static function obtenerOfertaActiva(): array
     {
@@ -18,7 +21,7 @@ class OfertaDAO
     }
 
     /**
-     * Calcula el descuento según el carrito
+     * Calcula si el carrito recibe descuento y devuelve totales.
      */
     public static function calcularDescuento(int $cantidadProductos, float $subtotal): array
     {

@@ -1,5 +1,4 @@
-<!-- Header Section -->
-
+<!-- Hero principal -->
 <section class="hero-kobe d-flex align-items-center">
     <div class="container">
         <div class="col-md-7 col-lg-6">
@@ -11,8 +10,7 @@
     </div>
 </section>
 
-<!-- Primera seccion -->
-
+<!-- Primera sección: experiencias destacadas -->
 <section class="experiencias py-5">
     <div class="container">
         <div class="row g-4">
@@ -44,8 +42,7 @@
     </div>
 </section>
 
-<!-- Seguunda seccion -->
-
+<!-- Segunda sección: grid de experiencias gastronómicas -->
 <section class="experiencias-grid py-5">
     <div class="container">
         <h2 class="text-black mb-4">Nuestras Experiencias Gastronómicas</h2>
@@ -120,7 +117,7 @@
     </div>
 </section>
 
-<!-- Tercera seccion -->
+<!-- Tercera sección: bloque de búsqueda -->
 <section class="experiencias-search py-5">
     <div class="container">
         <div class="row align-items-center g-5">
@@ -137,7 +134,7 @@
                     <input type="text" class="form-control" placeholder="Introduzca tu plato favorito" disabled>
                 </div>
             </div>
-            <div class="col-lg-6 text-center"> 
+            <div class="col-lg-6 text-center">
                 <img class="img-fluid rounded-4 shadow" src="public/images/home/Seccion3.webp" alt="Platos Porscheats">
             </div>
         </div>

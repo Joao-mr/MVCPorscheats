@@ -1,3 +1,4 @@
+/* Paleta base y tokens reutilizables del panel */
 :root {
     --admin-bg: #f5f6f8;
     --admin-card: #ffffff;
@@ -7,6 +8,7 @@
     --admin-muted: #6c757d;
 }
 
+/* Estructura principal */
 .admin-layout {
     display: flex;
     min-height: 80vh;
@@ -14,6 +16,7 @@
     gap: 0;
 }
 
+/* Barra lateral */
 .admin-sidebar {
     width: 230px;
     background: var(--admin-dark);
@@ -56,6 +59,7 @@
     color: #000;
 }
 
+/* Contenido principal */
 .admin-content {
     flex: 1;
     padding: 32px;
@@ -88,6 +92,7 @@
     margin: 0;
 }
 
+/* Tarjetas y paneles */
 .panel-card {
     background: var(--admin-card);
     border: 1px solid var(--admin-border);
@@ -114,6 +119,7 @@
     font-weight: 600;
 }
 
+/* Inputs genéricos */
 .filtro-input,
 input,
 select,
@@ -130,6 +136,7 @@ textarea {
     resize: vertical;
 }
 
+/* Tablas */
 .tabla-wrapper {
     overflow-x: auto;
 }
@@ -156,6 +163,7 @@ textarea {
     background: #fafbfc;
 }
 
+/* Acciones sobre productos/pedidos */
 .product-actions {
     display: flex;
     gap: 0.5rem;
@@ -180,6 +188,7 @@ textarea {
     color: #fff;
 }
 
+/* Botones principales */
 .btn-primary,
 .btn-secondary,
 .btn-link {
@@ -207,6 +216,7 @@ textarea {
     padding: 0.4rem 0.2rem;
 }
 
+/* Formularios */
 .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -226,6 +236,7 @@ textarea {
     justify-content: flex-end;
 }
 
+/* Utilidades */
 .is-hidden {
     display: none !important;
 }

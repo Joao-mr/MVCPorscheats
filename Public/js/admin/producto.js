@@ -1,3 +1,4 @@
+// Configuración de la API de divisas usada sólo como apoyo visual en el panel.
 const FREECURRENCY_API_URL = 'https://api.freecurrencyapi.com/v1/latest';
 const FREECURRENCY_DEFAULTS = { EUR: 1, USD: 1.09, GBP: 0.86, MXN: 18.5 };
 const DEFAULT_API_KEY = 'fca_live_MJ4Fr0zs3hhXPevkGRZioVd1LghISfz5Bpjmz65J';
@@ -38,7 +39,7 @@ class ProductoService {
         this.currencyInfo = document.getElementById('currencyRateInfo');
     }
 
-    // Eventos principales: submit de formularios y clicks en la tabla.
+    // Eventos principales: submit de formularios, clicks en la tabla y selector de moneda.
     bindEvents() {
         this.formCrear?.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -67,6 +68,7 @@ class ProductoService {
 
         this.btnToggleCrear?.addEventListener('click', () => this.toggleCrearForm());
         this.btnCerrarEditar?.addEventListener('click', () => this.hideEditarForm());
+
         this.currencySelect?.addEventListener('change', () => {
             this.currentCurrency = this.currencySelect.value;
             this.updateCurrencyInfo();
@@ -162,7 +164,7 @@ class ProductoService {
         this.showEditarForm();
     }
 
-    // POST sencillo: crea el producto, resetea el formulario y recarga la tabla.
+    // POST: crea el producto, resetea el formulario y recarga la tabla.
     async crearProducto(data) {
         const payload = this.buildPayload(data);
         delete payload.id;
@@ -273,9 +275,9 @@ class ProductoService {
         this.formEditar?.reset();
     }
 
-    // Nuevos métodos para manejo de divisas
+    // Carga las divisas desde la API o usa los valores por defecto.
     async loadExchangeRates() {
-        const apiKey = this.currencyPanel?.dataset.apiKey || '';
+        const apiKey = this.currencyPanel?.dataset.apiKey || DEFAULT_API_KEY;
 
         if (!apiKey) {
             this.updateCurrencyInfo();
@@ -299,10 +301,12 @@ class ProductoService {
         }
     }
 
+    // Devuelve la tasa seleccionada; si no existe, 1.
     getSelectedRate() {
         return this.currencyRates?.[this.currentCurrency] ?? 1;
     }
 
+    // Actualiza el texto informativo debajo del selector de moneda.
     updateCurrencyInfo() {
         if (!this.currencyInfo) return;
         const rate = this.getSelectedRate();

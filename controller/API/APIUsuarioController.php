@@ -3,7 +3,7 @@ require_once __DIR__ . '/APIController.php';
 require_once __DIR__ . '/../../model/DAO/UsuarioDAO.php';
 
 /**
- * API sencilla para gestionar usuarios.
+ * API para gestionar usuarios.
  */
 class APIUsuarioController extends APIController
 {

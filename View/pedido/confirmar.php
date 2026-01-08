@@ -1,4 +1,5 @@
 <div class="container py-5">
+    <!-- Vista de confirmación: descripción breve y CTA final -->
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
             <div class="card shadow-sm">

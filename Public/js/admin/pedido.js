@@ -1,18 +1,21 @@
+// Servicio responsable de consultar, filtrar y actualizar pedidos en el panel admin.
 class PedidoService {
     constructor(apiUrl, tableSelector, summarySelector) {
         this.apiUrl = apiUrl;
         this.tableSelector = tableSelector;
         this.summarySelector = summarySelector;
         this.pedidos = [];
-        this.estadosPermitidos = ['pendiente', 'pagado','entregado', 'cancelado'];
+        this.estadosPermitidos = ['pendiente', 'pagado', 'entregado', 'cancelado'];
     }
 
+    // Punto de entrada: cachea nodos, registra eventos y carga datos iniciales.
     init() {
         this.cacheElements();
         this.bindEvents();
         this.loadPedidos();
     }
 
+    // Cachea referencias del DOM para no consultarlas repetidamente.
     cacheElements() {
         this.table = document.querySelector(this.tableSelector);
         this.tbody = this.table ? this.table.querySelector('tbody') : null;
@@ -22,12 +25,12 @@ class PedidoService {
         this.filterMinimo = document.getElementById('filterMinimo');
     }
 
+    // Registra listeners de filtros y delega cambios de estado dentro de la tabla.
     bindEvents() {
         this.filterUsuario?.addEventListener('input', () => this.applyFilters());
         this.filterFecha?.addEventListener('change', () => this.applyFilters());
         this.filterMinimo?.addEventListener('input', () => this.applyFilters());
 
-        // Delegar cambios de estado en la tabla
         this.table?.addEventListener('change', (event) => {
             const select = event.target.closest('.pedido-estado');
             if (!select) return;
@@ -40,11 +43,13 @@ class PedidoService {
         });
     }
 
+    // Carga los pedidos desde la API y aplica filtros iniciales.
     async loadPedidos() {
         this.pedidos = await this.fetchPedidos();
         this.applyFilters();
     }
 
+    // Realiza la llamada GET a la API; devuelve array vacío si falla.
     async fetchPedidos() {
         try {
             const response = await fetch(this.apiUrl, { method: 'GET' });
@@ -57,6 +62,7 @@ class PedidoService {
         }
     }
 
+    // Aplica filtros por usuario, fecha e importe mínimo antes de pintar.
     applyFilters() {
         const usuarioFiltro = (this.filterUsuario?.value || '').trim().toLowerCase();
         const fechaFiltro = this.filterFecha?.value || '';
@@ -77,6 +83,7 @@ class PedidoService {
         this.renderPedidos(pedidosFiltrados);
     }
 
+    // Pinta el listado y actualiza el resumen del importe visible.
     renderPedidos(pedidos) {
         if (!this.tbody) return;
 
@@ -113,6 +120,7 @@ class PedidoService {
         }
     }
 
+    // Envía el nuevo estado al backend; si falla, restaura el valor anterior.
     async updateEstado(id, estado, estadoAnterior, select) {
         try {
             const response = await fetch(this.apiUrl, {
@@ -135,6 +143,7 @@ class PedidoService {
     }
 }
 
+// Inicializa el servicio cuando el DOM está listo.
 document.addEventListener('DOMContentLoaded', () => {
     const servicioPedidos = new PedidoService(
         'index.php?controller=APIPedido&action=index',

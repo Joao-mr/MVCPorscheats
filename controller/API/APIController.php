@@ -19,7 +19,7 @@ class APIController
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
         header('Access-Control-Allow-Headers: Content-Type');
 
-        // Detectar y guardar el método HTTP de la petición.
+        // Detecta y guarda el método HTTP de la petición.
         $this->method = $_SERVER['REQUEST_METHOD'];
     }
 }

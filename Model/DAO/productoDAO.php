@@ -3,13 +3,19 @@
 require_once __DIR__ . '/../Producto.php';
 require_once __DIR__ . '/../../database/database.php';
 
-
-class ProductoDAO{
+/**
+ * DAO de productos: expone utilidades de lectura y CRUD básico.
+ */
+class ProductoDAO
+{
+    /**
+     * Recupera un producto por su ID. Devuelve instancia o null.
+     */
     public static function getProductoByID($id)
     {
         $con = DataBase::connect();
-        $stmt = $con->prepare("SELECT * FROM producto WHERE id_producto = ?");
-        $stmt->bind_param("i", $id);
+        $stmt = $con->prepare('SELECT * FROM producto WHERE id_producto = ?');
+        $stmt->bind_param('i', $id);
         $stmt->execute();
 
         $result = $stmt->get_result();
@@ -21,10 +27,13 @@ class ProductoDAO{
         return $row ? self::mapRowToProducto($row) : null;
     }
 
+    /**
+     * Devuelve todos los productos ordenados descendentemente.
+     */
     public static function getProductos(): array
     {
         $con = DataBase::connect();
-        $stmt = $con->prepare("SELECT * FROM producto ORDER BY id_producto DESC");
+        $stmt = $con->prepare('SELECT * FROM producto ORDER BY id_producto DESC');
         $stmt->execute();
 
         $result = $stmt->get_result();
@@ -36,6 +45,9 @@ class ProductoDAO{
         return array_map([self::class, 'mapRowToProducto'], $rows);
     }
 
+    /**
+     * Mapea una fila de base de datos a la entidad Producto.
+     */
     private static function mapRowToProducto(array $row): Producto
     {
         $producto = new Producto();
@@ -65,11 +77,14 @@ class ProductoDAO{
         return $producto;
     }
 
+    /**
+     * Inserta un nuevo producto.
+     */
     public static function create(array $data): bool
     {
         $con = DataBase::connect();
-        $sql = "INSERT INTO producto (nombre, descripcion, caracteristica, precio_unidad, categoria)
-                VALUES (?, ?, ?, ?, ?)";
+        $sql = 'INSERT INTO producto (nombre, descripcion, caracteristica, precio_unidad, categoria)
+                VALUES (?, ?, ?, ?, ?)';
 
         $stmt = $con->prepare($sql);
         $nombre        = $data['nombre_producto'] ?? $data['nombre'] ?? '';
@@ -78,7 +93,7 @@ class ProductoDAO{
         $precio        = $data['precio_unidad'] ?? $data['precio_producto'] ?? $data['precio'] ?? 0;
         $categoria     = $data['categoria'] ?? '';
 
-        $stmt->bind_param("sssds", $nombre, $descripcion, $caracteristica, $precio, $categoria);
+        $stmt->bind_param('sssds', $nombre, $descripcion, $caracteristica, $precio, $categoria);
         $ok = $stmt->execute();
 
         $stmt->close();
@@ -87,12 +102,15 @@ class ProductoDAO{
         return $ok;
     }
 
+    /**
+     * Actualiza un producto existente.
+     */
     public static function update(array $data): bool
     {
         $con = DataBase::connect();
-        $sql = "UPDATE producto
+        $sql = 'UPDATE producto
                 SET nombre = ?, descripcion = ?, caracteristica = ?, precio_unidad = ?, categoria = ?
-                WHERE id_producto = ?";
+                WHERE id_producto = ?';
 
         $stmt = $con->prepare($sql);
         $nombre        = $data['nombre_producto'] ?? $data['nombre'] ?? '';
@@ -102,7 +120,7 @@ class ProductoDAO{
         $categoria     = $data['categoria'] ?? '';
         $id            = (int) ($data['id'] ?? $data['id_producto'] ?? 0);
 
-        $stmt->bind_param("sssdsi", $nombre, $descripcion, $caracteristica, $precio, $categoria, $id);
+        $stmt->bind_param('sssdsi', $nombre, $descripcion, $caracteristica, $precio, $categoria, $id);
         $ok = $stmt->execute();
 
         $stmt->close();
@@ -111,11 +129,14 @@ class ProductoDAO{
         return $ok;
     }
 
+    /**
+     * Elimina un producto por ID.
+     */
     public static function delete(int $id): bool
     {
         $con = DataBase::connect();
-        $stmt = $con->prepare("DELETE FROM producto WHERE id_producto = ?");
-        $stmt->bind_param("i", $id);
+        $stmt = $con->prepare('DELETE FROM producto WHERE id_producto = ?');
+        $stmt->bind_param('i', $id);
         $ok = $stmt->execute();
 
         $stmt->close();
@@ -123,7 +144,4 @@ class ProductoDAO{
 
         return $ok;
     }
-
 }
-
-?>

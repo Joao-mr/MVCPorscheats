@@ -8,6 +8,7 @@
                          class="img-fluid rounded-4 shadow-lg">
                 </div>
             </div>
+
             <div class="col-lg-6">
                 <h1 class="mb-3"><?= $producto->getNombre(); ?></h1>
                 <p class="lead text-muted mb-4"><?= $producto->getDescripcion(); ?></p>
@@ -18,16 +19,18 @@
                     <li><strong>Disponibilidad:</strong> <?= $producto->getDisponibilidad(); ?></li>
                 </ul>
 
-                    <input type="hidden" name="idproducto" value="<?= $producto->getId_producto(); ?>">
-                    <button 
-                        class="btn btn-dark btn-lg px-5 js-btn-comprar"
-                        data-id="<?= $producto->getId_producto(); ?>"
-                        data-nombre="<?= $producto->getNombre(); ?>"
-                        data-precio="<?= $producto->getPrecio_unidad(); ?>"
-                        data-imagen="public/images/<?= $producto->getImagen(); ?>"
-                        data-categoria="<?= $producto->getCategoria(); ?>"
-                        >Agregar al carrito
-                    </button>
+                <!-- Acciones sobre el producto -->
+                <input type="hidden" name="idproducto" value="<?= $producto->getId_producto(); ?>">
+                <button
+                    class="btn btn-dark btn-lg px-5 js-btn-comprar"
+                    data-id="<?= $producto->getId_producto(); ?>"
+                    data-nombre="<?= $producto->getNombre(); ?>"
+                    data-precio="<?= $producto->getPrecio_unidad(); ?>"
+                    data-imagen="public/images/<?= $producto->getImagen(); ?>"
+                    data-categoria="<?= $producto->getCategoria(); ?>"
+                >
+                    Agregar al carrito
+                </button>
             </div>
         </div>
     </div>

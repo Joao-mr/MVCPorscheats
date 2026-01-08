@@ -3,7 +3,7 @@ require_once __DIR__ . '/APIController.php';
 require_once __DIR__ . '/../../model/DAO/PedidoDAO.php';
 
 /**
- * API sencilla para consultar pedidos existentes.
+ * API para consultar pedidos existentes y actualizar su estado.
  */
 class APIPedidoController extends APIController
 {
@@ -45,7 +45,7 @@ class APIPedidoController extends APIController
     }
 
     /**
-     * Actualiza el estado de un pedido (pendiente, enviado, cancelado).
+     * Actualiza el estado de un pedido (pendiente, pagado, entregado, cancelado).
      */
     private function handlePut()
     {

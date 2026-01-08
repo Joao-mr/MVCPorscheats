@@ -1,20 +1,14 @@
-
 /**
  * Añade un producto al carrito almacenado en localStorage.
  * @param {Object} producto Datos mínimos del producto (id, nombre, precio, imagen, categoria).
  */
 function agregarAlCarrito(producto) {
-    // Paso 1: Intentamos leer el carrito actual; si no existe, usamos un array vacío.
     const carritoActual = JSON.parse(localStorage.getItem('carrito')) || [];
-
-    // Paso 2: Buscamos si el producto ya está en el carrito comparando por su id.
     const indice = carritoActual.findIndex(item => item.id === producto.id);
 
     if (indice >= 0) {
-        // Paso 3A: Si existe, aumentamos la cantidad en 1.
         carritoActual[indice].cantidad += 1;
     } else {
-        // Paso 3B: Si no existe, lo añadimos con cantidad inicial 1.
         carritoActual.push({
             id: producto.id,
             nombre: producto.nombre,
@@ -25,7 +19,6 @@ function agregarAlCarrito(producto) {
         });
     }
 
-    // Paso 4: Guardamos de nuevo el carrito actualizado en localStorage.
     localStorage.setItem('carrito', JSON.stringify(carritoActual));
 }
 
