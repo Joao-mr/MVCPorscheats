@@ -77,7 +77,7 @@ class APIProductoController extends APIController
         return [
             'id_producto'     => method_exists($producto, 'getId_producto') 
                                     ? $producto->getId_producto() 
-                                    : nullnull,
+                                    : null,
 
             'nombre_producto' => method_exists($producto, 'getNombre') 
                                     ? $producto->getNombre() 
