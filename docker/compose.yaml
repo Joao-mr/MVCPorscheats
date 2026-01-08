@@ -1,0 +1,35 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql-porscheats
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: porscheats
+      MYSQL_USER: porsche
+      MYSQL_PASSWORD: porsche
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - porscheats-net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-porscheats
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8080:80"
+    networks:
+      - porscheats-net
+
+volumes:
+  mysql-data:
+
+networks:
+  porscheats-net:
