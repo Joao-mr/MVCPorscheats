@@ -1,0 +1,214 @@
+# Porscheats
+
+Porscheats es una aplicación web de restauración desarrollada en PHP con arquitectura MVC.  
+Permite gestionar un catálogo de productos, realizar pedidos y manejar usuarios, con una separación clara entre modelos, controladores y vistas.
+
+---
+
+## 1. ¿Qué es este proyecto?
+
+Es una web de restaurante donde un usuario puede:
+
+- Ver el catálogo de platos y bebidas.
+- Añadir productos a un carrito/pedido.
+- Finalizar el pedido.
+- Gestionar su cuenta de usuario (según lo implementado).
+- Disponer de una parte de administración y una API para consumir datos desde JavaScript u otros clientes.
+
+
+
+---
+
+## 2. Tecnologías utilizadas
+
+- **Backend:** PHP 8+ (arquitectura MVC artesanal)
+- **Base de datos:** MySQL (script en `database/porscheats.sql` si existe)
+- **Frontend:** HTML, CSS, JavaScript
+- **Servidor local recomendado:** XAMPP (Apache + MySQL)
+- **Entorno de desarrollo:** Visual Studio Code
+
+---
+
+## 3. Estructura del proyecto
+
+En la raíz del proyecto tienes:
+
+- `Index.php`  
+  Front controller.  
+  Lee los parámetros `controller` y `action` de la URL, carga el controlador correspondiente y ejecuta el método.  
+  Soporta controladores normales y controladores de API (los que empiezan por `API`).
+
+### 3.1. Base de datos
+
+- `database/`
+  - `database.php`: configuración y conexión a la base de datos (host, usuario, contraseña, nombre de BD).
+
+### 3.2. Controladores
+
+- `controller/`
+  - Controladores web (HTML):
+    - `homecontroller.php`
+    - `productoController.php`
+    - `pedidoController.php`
+    - `usuarioController.php`
+    - `adminController.php`
+  - Controladores API (respuestas normalmente en JSON):
+    - `API/`
+      - `APIController.php`
+      - `APIPedidoController.php`
+      - `APIProductoController.php`
+      - `APIUsuarioController.php`
+
+Los controladores reciben la petición, hablan con los modelos y seleccionan la vista que se debe mostrar (o generan JSON en el caso de la API).
+
+### 3.3. Modelos y DAOs
+
+- `model/`
+  - Modelos (entidades del dominio):
+    - `Producto.php`
+    - `Pedido.php`
+    - `LineaPedido.php`
+    - `Usuario.php`
+    - `Oferta.php`
+    - `OfertaProducto.php`
+    - `Favorito.php`
+    - `LogAcciones.php`
+  - Acceso a datos (DAO):
+    - `DAO/`
+      - `productoDAO.php`
+      - `pedidoDAO.php`
+      - `lineaPedidoDAO.php`
+      - `usuarioDAO.php`
+      - `ofertaDAO.php`
+
+Los modelos representan la información (productos, pedidos, usuarios, etc.)  
+Los DAOs se encargan de hablar con la base de datos (consultas, inserts, updates, deletes).
+
+### 3.4. Recursos estáticos
+
+- `public/`
+  - `css/`
+    - `main.css` (estilos generales de la web)
+    - `admin.css` (estilos para el área de administración)
+  - `js/`
+    - `main.js`
+    - `carrito.js` (lógica del carrito)
+    - `pedido.js` (lógica del pedido)
+    - `admin/`
+      - `index.js`
+      - `pedido.js`
+      - `producto.js`
+  - `images/`
+    - `home/`
+    - `iconos/`
+    - `logos/`
+    - `platos/`
+      - `primeros/`
+      - `segundos/`
+      - `postres/`
+      - `bebidas/`
+  - `fonts/`
+    - Fuentes usadas en la interfaz.
+
+> Nota: Las vistas (plantillas HTML/PHP que se renderizan) suelen estar en una carpeta `view/` con subcarpetas por sección (home, producto, pedido, usuario, admin, parciales como header/footer). Su estructura concreta dependerá de tu proyecto, pero los controladores son los que las cargan.
+
+---
+
+## 4. Cómo funciona (flujo MVC)
+
+1. **Petición del usuario**  
+   El navegador llama a una URL como:  
+   `Index.php?controller=Producto&action=index`
+
+2. **Front controller (`Index.php`)**  
+   - Lee `$_GET['controller']` y construye el nombre de la clase (`productoController`, `usuarioController`, etc.).
+   - Si el nombre empieza por `API`, carga el archivo desde `controller/API/`, si no, desde `controller/`.
+   - Comprueba que el archivo existe y lo incluye.
+   - Crea una instancia del controlador.
+   - Llama al método indicado en `$_GET['action']`.
+
+3. **Controlador**  
+   - Usa los modelos y DAOs para obtener o guardar datos en la base de datos.
+   - Prepara los datos que se necesitan mostrar.
+   - Carga la vista adecuada (o devuelve JSON en el caso de un controlador API).
+
+4. **Vista / Respuesta**  
+   - En una petición web normal: se genera HTML con CSS y JS.
+   - En una llamada a la API: normalmente se devuelve JSON.
+
+---
+
+## 5. Puesta en marcha en local
+
+1. **Copiar el proyecto**  
+   Coloca el proyecto en:
+
+   ```text
+   C:\xampp\htdocs\MVCPorscheats
+   ```
+
+2. **Crear la base de datos**  
+   - Inicia MySQL desde XAMPP.
+   - Entra en phpMyAdmin.
+   - Crea una base de datos (por ejemplo `porscheats`).
+   - Importa el script SQL si lo tienes (por ejemplo `database/porscheats.sql`).
+
+3. **Configurar conexión**  
+   - Edita `database/database.php`.
+   - Ajusta:
+     - host (por defecto `localhost`)
+     - usuario (por defecto `root`)
+     - contraseña
+     - nombre de la base de datos
+
+4. **Arrancar el servidor**  
+   - Inicia Apache en XAMPP.
+   - Abre en el navegador:
+
+     ```text
+     http://localhost/MVCPorscheats/Index.php?controller=Home&action=index
+     ```
+
+---
+
+## 6. Rutas habituales (ejemplos)
+
+Dependiendo de cómo estén definidos tus métodos en los controladores, algunas rutas típicas pueden ser:
+
+- **Inicio (home):**  
+  `Index.php?controller=Home&action=index`
+
+- **Listado de productos:**  
+  `Index.php?controller=Producto&action=index`
+
+- **Detalle de producto:**  
+  `Index.php?controller=Producto&action=show&id=ID_PRODUCTO`
+
+- **Carrito / pedido actual:**  
+  `Index.php?controller=Pedido&action=cesta`  
+  (o la acción de pedido que uses)
+
+- **Zona de usuario:**  
+  - Login: `Index.php?controller=Usuario&action=login`
+  - Registro: `Index.php?controller=Usuario&action=registro`
+  - Cuenta: `Index.php?controller=Usuario&action=cuenta`
+
+- **Panel de administración:**  
+  `Index.php?controller=Admin&action=index`
+
+- **API (JSON):**
+  - Productos: `Index.php?controller=APIProducto&action=...`
+  - Pedidos: `Index.php?controller=APIPedido&action=...`
+  - Usuarios: `Index.php?controller=APIUsuario&action=...`
+
+---
+
+## 7. Cómo seguir desarrollando
+
+- Para cambiar la **lógica de negocio** → edita controladores y modelos/DAOs.
+- Para cambiar el **aspecto visual** → modifica vistas y archivos dentro de `public/css` y `public/js`.
+- Para añadir una nueva funcionalidad:
+  1. Crea/ajusta el modelo y su DAO en `model/` y `model/DAO/`.
+  2. Añade métodos en el controlador correspondiente en `controller/`.
+  3. Crea o modifica la vista que mostrará esa información.
+  4. Accede desde el navegador usando `?controller=TuControlador&action=TuAccion`.

@@ -2,12 +2,12 @@
 
 class LineaPedido{
     private $id_linea;
-    private $id_pediod;
+    private $id_pedido;
     private $id_producto;
     private $cantidad;
     private $precio_unidad;
     private $porcentaje_descuento;
-    private $precio_fianl_unidad;
+    private $precio_final_unidad;
     private $subtotal;
 
     public function getId_linea() {

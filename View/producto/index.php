@@ -1,4 +1,7 @@
-<?php $selectedCategory = $selectedCategory ?? 'todos'; ?>
+<?php
+// Categoría seleccionada por defecto para mantener consistencia visual.
+$selectedCategory = $selectedCategory ?? 'todos';
+?>
 <section class="productos-page">
     <div class="container-fluid ">
         <div class="row g-5 ">
@@ -7,6 +10,7 @@
                 <div class="filtros-card p-4">
                     <h5 class="mb-3">Platos</h5>
                     <?php
+                    // Catálogo de filtros disponibles para navegar por categoría.
                     $filtros = [
                         'todos'     => 'Todos',
                         'primeros'  => 'Primeros platos',
@@ -33,7 +37,6 @@
                        href="index.php?controller=Producto&action=index">
                         Eliminar filtros
                     </a>
-
                 </div>
             </aside>
 
@@ -42,16 +45,18 @@
                 <?php foreach ($productosPorCategoria as $categoria => $productos): ?>
                     <section class="categoria-block mb-5">
                         <div class="d-flex justify-content-between align-items-baseline mb-3">
-                            <h3 class="categoria-titulo"><?= ucfirst($categoria); ?> platos (<?= count($productos); ?>) </h3>
-                            </div>
+                            <h3 class="categoria-titulo">
+                                <?= ucfirst($categoria); ?> (<?= count($productos); ?>)
+                            </h3>
+                        </div>
 
                         <div class="row g-4">
                             <?php foreach ($productos as $producto): ?>
                                 <div class="col-md-6 col-xl-4">
                                     <article class="card-producto h-100 d-flex flex-column">
-                                        
+
                                         <div class="card-producto__media">
-                                            <img src="/MVCPorscheats/public/images/<?= $producto->getImagen(); ?>" alt="<?= $producto->getNombre(); ?>">
+                                            <img src="public/images/<?= $producto->getImagen(); ?>" alt="<?= $producto->getNombre(); ?>">
                                         </div>
 
                                         <div class="card-producto__body flex-grow-1 d-flex flex-column">
@@ -65,9 +70,24 @@
                                             </ul>
 
                                             <div class="d-flex gap-2">
-                                                <button class="btn btn-dark flex-grow-1">Comprar</button>
-                                                <a class="btn btn-outline-dark flex-grow-1" href="?controller=Producto&action=show&idproducto=<?= $producto->getId_producto(); ?>">Descubrir plato</a>
-                                                
+                                                <button
+                                                    class="btn btn-dark flex-grow-1 js-btn-comprar"
+                                                    data-id="<?= $producto->getId_producto(); ?>"
+                                                    data-nombre="<?= $producto->getNombre(); ?>"
+                                                    data-precio="<?= $producto->getPrecio_unidad(); ?>"
+                                                    data-imagen="public/images/<?= $producto->getImagen(); ?>"
+                                                    data-categoria="<?= $producto->getCategoria(); ?>"
+                                                >
+                                                    Comprar
+                                                </button>
+
+                                                <a
+                                                    class="btn btn-outline-dark flex-grow-1"
+                                                    href="?controller=Producto&action=show&idproducto=<?= $producto->getId_producto(); ?>"
+                                                >
+                                                    Descubrir plato
+                                                </a>
+
                                             </div>
                                         </div>
                                     </article>

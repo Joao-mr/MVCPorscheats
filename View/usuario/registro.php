@@ -1,14 +1,20 @@
+<?php
+// Preparar mensaje de error sanitizado para mantener la vista limpia y segura.
+$hayError = !empty($error);
+$mensajeError = $hayError ? htmlspecialchars($error) : '';
+?>
 <section class="py-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-9 col-lg-6">
                 <div class="card shadow-lg border-0">
                     <div class="card-body p-4">
-                        <?php if (!empty($error)): ?>
+                        <?php if ($hayError): ?>
                             <div class="alert alert-danger mb-4">
-                                <?= htmlspecialchars($error); ?>
+                                <?= $mensajeError; ?>
                             </div>
                         <?php endif; ?>
+
                         <div class="text-center mb-4">
                             <h2 class="fw-bold mb-1">Crear cuenta</h2>
                             <p class="text-muted mb-0">Únase a Porscheats y disfrute experiencias exclusivas</p>

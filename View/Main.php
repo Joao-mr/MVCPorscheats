@@ -1,6 +1,10 @@
 <?php
-$nav    = __DIR__ . '/Partials/Navbar.php';
-$footer = __DIR__ . '/Partials/Footer.php';
+$nav          = __DIR__ . '/partials/navbar.php';
+$footer       = __DIR__ . '/partials/footer.php';
+$vistaDefinida = isset($view);
+$esVistaAdmin  = $vistaDefinida && str_contains($view, 'admin');
+$requiereCarrito = $vistaDefinida && str_contains($view, 'pedido/carrito');
+$requierePedido  = $vistaDefinida && str_contains($view, 'pedido/confirmar');
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +17,13 @@ $footer = __DIR__ . '/Partials/Footer.php';
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="/MVCPorscheats/Public/css/Main.css?v=<?= time(); ?>">
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="public/css/main.css?v=<?= time(); ?>">
+
+    <!-- CSS específico para vistas de administración -->
+    <?php if ($esVistaAdmin): ?>
+        <link rel="stylesheet" href="public/css/admin.css?v=<?= time(); ?>">
+    <?php endif; ?>
 </head>
 <body>
 
@@ -23,23 +32,37 @@ $footer = __DIR__ . '/Partials/Footer.php';
 
     <!-- Contenido -->
     <main>
-        <?php 
-        if (isset($view) && file_exists($view)) {
+        <?php
+        if ($vistaDefinida && file_exists($view)) {
             include $view;
         } else {
-            echo "<p>Error: la vista '$view' no existe.</p>";
-        }?>
+            $vistaActual = $vistaDefinida ? $view : '';
+            echo "<p>Error: la vista '{$vistaActual}' no existe.</p>";
+        }
+        ?>
     </main>
 
     <!-- Footer -->
     <?php include_once $footer; ?>
 
-    <!-- Bootstrap JS -->
+    <!-- JS principal -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="public/js/main.js"></script>
 
-    
-  <!-- Elimina si no existe main.js o créalo -->
-    <!-- <script src="/MVCPorscheats/Public/js/main.js"></script> -->
+    <!-- JS específicos según la vista -->
+    <?php if ($requiereCarrito): ?>
+        <script src="public/js/carrito.js"></script>
+    <?php endif; ?>
+
+    <?php if ($requierePedido): ?>
+        <script src="public/js/pedido.js"></script>
+    <?php endif; ?>
+
+    <?php if ($esVistaAdmin): ?>
+        <script src="public/js/admin/index.js"></script>
+        <script src="public/js/admin/pedido.js"></script>
+        <script src="public/js/admin/producto.js"></script>
+    <?php endif; ?>
 </body>
 </html>
 

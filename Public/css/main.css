@@ -1,39 +1,62 @@
-/*TIPOGRAFIA IMPORTADA PORSCHE NEXT*/
-
-@font-face{
+/* ==========================================================================
+   Tipografía Porsche Next
+   ========================================================================== */
+@font-face {
     font-family: 'Porsche Next';
     src: url('../Tipografia/PorscheNext.ttf') format('opentype');
     font-weight: 400;
 }
 
-@font-face{
+@font-face {
     font-family: 'Porsche Next';
     src: url('../Tipografia/PorscheNext-SemiBold.otf') format('opentype');
     font-weight: 600;
 }
 
-/* --- Fix para eliminar scroll horizontal y márgenes inesperados --- */
+/* ==========================================================================
+   Variables y ajustes base
+   ========================================================================== */
+:root {
+    --color-negro: #000;
+    --color-blanco: #fff;
+    --color-gris-claro: #f4f4f4;
+    --color-gris-card: #f9f9f9;
+    --color-borde: #dcdcdc;
+    --color-texto-suave: #555555;
+    --color-nav-border: rgba(255, 255, 255, 0.15);
+}
 
-html, body {
-    overflow-x: hidden; /* Evita desbordamiento lateral */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    font-family: 'Porsche Next', sans-serif !important;
+    background-color: var(--color-blanco);
+    color: var(--color-negro);
 }
 
 .productos-page {
-    padding: 0 !important; /* Evita margen blanco superior e inferior */
-}   
+    padding: 0 !important;
+    background: var(--color-gris-claro);
+}
 
 .container-fluid {
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
 
-body{
-    font-family: 'Porsche Next' !important;
-}
-/* ----------------------------------------
-   NAVBAR – Estilos Comunes
----------------------------------------- */
-
+/* ==========================================================================
+   Navbar
+   ========================================================================== */
 .navbar-brand img {
     display: block;
     height: clamp(40px, 8vw, 40px);
@@ -54,7 +77,7 @@ body{
     letter-spacing: 0.08em;
 }
 
-/* Centrar logo en escritorio */
+/* Logo centrado en escritorio */
 @media (min-width: 992px) {
     .navbar-brand {
         position: absolute;
@@ -63,7 +86,7 @@ body{
     }
 }
 
-/* Móvil */
+/* Navbar móvil */
 @media (max-width: 576px) {
     .navbar-brand img,
     .navbar .nav-link img {
@@ -75,10 +98,7 @@ body{
     }
 }
 
-/* ----------------------------------------
-   NAVBAR HOME (blanco)
----------------------------------------- */
-
+/* Navbar home en blanco */
 .navbar-home {
     position: absolute;
     top: 20px;
@@ -88,31 +108,27 @@ body{
 }
 
 .navbar-home .navbar-toggler span {
-    color: #fff !important;
+    color: var(--color-blanco) !important;
 }
 
-
-/* ----------------------------------------
-   NAVBAR INTERIOR (negro)
----------------------------------------- */
-
+/* Navbar interior en negro translúcido */
 .navbar-black {
-   background-color: transparent;
+    background-color: transparent;
     backdrop-filter: blur(6px);
-    border-bottom: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid var(--color-nav-border);
 }
-
 
 .navbar-black .navbar-toggler span {
     color: #111 !important;
 }
 
-
-/*FOOTER*/
-
+/* ==========================================================================
+   Footer
+   ========================================================================== */
 .footer {
-    background-color: #000;
+    background-color: var(--color-negro);
     font-size: 0.9rem;
+    color: var(--color-blanco);
 }
 
 .footer a {
@@ -121,22 +137,22 @@ body{
 }
 
 .footer a:hover {
-    color: #ffffff;
+    color: var(--color-blanco);
 }
 
 .footer .btn-outline-light {
     font-size: 0.8rem;
     padding: 10px;
-    background-color: #fff;
-    color: #000;
+    background-color: var(--color-blanco);
+    color: var(--color-negro);
 }
 
 .footer .btn-outline-light:hover,
 .footer .btn-outline-light:focus,
 .footer .btn-outline-light:active {
     background-color: #afafaf;
-    border-color: #afafaf;  
-    color: #000;
+    border-color: #afafaf;
+    color: var(--color-negro);
 }
 
 .footer .btn-outline-light img {
@@ -149,13 +165,12 @@ body{
     filter: brightness(0.2);
 }
 
-/*HOME*/
-
-/*Header*/
-
+/* ==========================================================================
+   Home
+   ========================================================================== */
 .hero-kobe {
     min-height: 100vh;
-    background: url('/MVCPorscheats/Public/images/platos/bannerr.webp') center/cover no-repeat;
+    background: url('/MVCPorscheats/public/images/home/banner.webp') center/cover no-repeat;
     position: relative;
     padding: 5rem 0;
 }
@@ -164,69 +179,70 @@ body{
     letter-spacing: 0.08em;
 }
 
-/*Primera seccion */
-
+/* Tarjetas de experiencia */
 .card-experiencia {
-    display:block;
-    position:relative;
-    min-height:290px;
-    border-radius:14px;
-    overflow:hidden;
-    background-size:cover;
-    background-position:center;
-    text-decoration:none;
+    display: block;
+    position: relative;
+    min-height: 290px;
+    border-radius: 14px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    text-decoration: none;
+    color: var(--color-blanco);
 }
 
 .card-experiencia--xl {
-    min-height:360px;
+    min-height: 360px;
 }
 
 @media (max-width: 768px) {
     .card-experiencia--xl {
-        min-height:280px;
+        min-height: 280px;
     }
 }
 
 .card-experiencia::after {
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(0, 0, 0, 0.592));
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.592));
 }
+
 .card-experiencia__body {
-    position:absolute;
-    inset:auto 0 0 0;
-    padding:1.2rem 1.4rem;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    color:#fff;
-    z-index:1;
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
 }
+
 .card-experiencia .arrow {
-    font-size:1.4rem;
-    transition:transform .2s;
+    font-size: 1.4rem;
+    transition: transform 0.2s ease;
 }
+
 .card-experiencia:hover .arrow {
-    transform:translateX(4px);
+    transform: translateX(4px);
 }
 
-/*Segunda seccion */
-
+/* Títulos de secciones */
 .experiencias-grid h2 {
     text-transform: uppercase;
-    letter-spacing: 0.08em; 
+    letter-spacing: 0.08em;
     font-size: 2.5rem;
 }
 
 .card-experiencia__body h3 {
     font-size: 1.1rem;
-    margin-bottom: .3rem;
+    margin-bottom: 0.3rem;
 }
 
 .card-experiencia__body p {
-    font-size: .85rem;
-    color: rgba(255,255,255,0.75);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
     margin: 0;
 }
 
@@ -237,28 +253,25 @@ body{
 
 .experiencias-grid .card-experiencia:hover {
     transform: translateY(-6px) scale(1.01);
-    box-shadow: 0 18px 35px rgba(0,0,0,0.35);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.35);
 }
 
-/*Tercera seccion*/
-
+/* Buscador */
 .experiencias-search {
-    background-color: #f9f9f9;
+    background-color: var(--color-gris-card);
 }
 
 .experiencias-search h2 {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 600;
     max-width: 500px;
-    
 }
 
 .experiencias-search p {
     font-size: 1rem;
-    color: #555555;
+    color: var(--color-texto-suave);
     margin-bottom: 1.5rem;
     max-width: 450px;
-
 }
 
 .experiencias-search .search-box {
@@ -291,20 +304,14 @@ body{
     opacity: 1;
 }
 
-
-/* ----------------------------------------
-   PRODUCTOS
----------------------------------------- */
-
-.productos-page {
-    background: #f4f4f4;
-}
-
+/* ==========================================================================
+   Productos
+   ========================================================================== */
 .filtros-card {
-    background: #fff;
+    background: var(--color-blanco);
     border-radius: 18px;
-    border: 1px solid #dcdcdc;
-    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+    border: 1px solid var(--color-borde);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
     position: sticky;
     top: 110px;
     margin-left: 20px;
@@ -320,7 +327,7 @@ body{
 .filtro-toggle {
     width: 100%;
     border: none;
-    border-top: 1px solid #dcdcdc;
+    border-top: 1px solid var(--color-borde);
     background: transparent;
     padding: 0.85rem 0;
     display: flex;
@@ -340,26 +347,26 @@ body{
 }
 
 .card-producto {
-    background: #fff;
+    background: var(--color-blanco);
     border-radius: 24px;
     padding: 1.5rem;
-    box-shadow: 0 16px 30px rgba(0,0,0,0.08);
-    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     margin-right: 20px;
-}   
+}
 
 .badge-categoria {
     text-align: center;
     max-width: 25%;
     background: #ececec;
-    color: #000;
+    color: var(--color-negro);
     margin-bottom: 0.6rem;
     border-radius: 5px;
 }
 
 .card-producto:hover {
     transform: translateY(-4px);
-    box-shadow: 0 24px 40px rgba(0,0,0,0.12);
+    box-shadow: 0 24px 40px rgba(0, 0, 0, 0.12);
 }
 
 .card-producto__media {
@@ -388,9 +395,7 @@ body{
     border-radius: 999px;
 }
 
-
-/*Show Producto*/
-
+/* Vista detalle de producto */
 .producto-show h1 {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 600;

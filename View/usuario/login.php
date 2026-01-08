@@ -2,6 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-5">
+                <!-- Tarjeta principal para el formulario de inicio de sesión -->
                 <div class="card shadow-lg border-0">
                     <div class="card-body p-4">
                         <div class="text-center mb-4">
@@ -9,6 +10,7 @@
                             <p class="text-muted mb-0">Acceda a su experiencia Porscheats</p>
                         </div>
 
+                        <!-- Formulario de autenticación -->
                         <form action="index.php?controller=Usuario&action=procesarLogin" method="POST" class="needs-validation" novalidate>
                             <div class="mb-3">
                                 <label class="form-label text-uppercase small">Email</label>
