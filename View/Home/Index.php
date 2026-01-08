@@ -129,7 +129,7 @@
                 <label class="form-label text-uppercase small fw-semibold">Busca tu plato favorito</label>
                 <div class="search-box">
                     <span class="search-icon">
-                        <img src="/MVCPorscheats/Public/images/iconos/search.svg" alt="buscar">
+                        <img src="/Public/images/iconos/search.svg" alt="buscar">
                     </span>
                     <input type="text" class="form-control" placeholder="Introduzca tu plato favorito" disabled>
                 </div>

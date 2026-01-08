@@ -3,7 +3,7 @@
         <div class="row align-items-center g-5">
             <div class="col-lg-6 text-center">
                 <div class="producto-show__media">
-                    <img src="/MVCPorscheats/Public/images/<?= $producto->getImagen(); ?>"
+                    <img src="/Public/images/<?= $producto->getImagen(); ?>"
                          alt="<?= $producto->getNombre(); ?>"
                          class="img-fluid rounded-4 shadow-lg">
                 </div>

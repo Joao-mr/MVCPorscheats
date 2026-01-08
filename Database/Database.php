@@ -10,6 +10,7 @@ class Database
         string $user = 'root',
         string $db   = 'porscheats',
         string $pass = 'root'
+        
     ): mysqli {
         $con = new mysqli($host, $user, $pass, $db, 3307);
 

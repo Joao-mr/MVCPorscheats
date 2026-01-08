@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-01-2026 a las 19:15:29
+-- Tiempo de generación: 08-01-2026 a las 18:52:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -140,7 +140,8 @@ INSERT INTO `lineapedido` (`id_linea`, `id_pedido`, `id_producto`, `cantidad`, `
 (96, 35, 12, 1, 148.00, 0.00, 148.00, 148.00),
 (97, 35, 10, 1, 310.00, 0.00, 310.00, 310.00),
 (98, 36, 12, 1, 148.00, 0.00, 148.00, 148.00),
-(99, 36, 11, 1, 138.00, 0.00, 138.00, 138.00);
+(99, 36, 11, 1, 138.00, 0.00, 138.00, 138.00),
+(100, 37, 6, 2, 91.00, 0.00, 91.00, 182.00);
 
 -- --------------------------------------------------------
 
@@ -248,7 +249,8 @@ INSERT INTO `pedido` (`id_pedido`, `id_usuario`, `id_oferta`, `fecha_pedido`, `m
 (29, 1, NULL, '2026-01-06 12:13:29', 'tarjeta', 'Por definir', 'pendiente', 668.00),
 (30, 15, NULL, '2026-01-07 00:47:14', 'tarjeta', 'Por definir', 'pagado', 1000.00),
 (35, 8, 1, '2026-01-07 15:04:55', 'tarjeta', 'Por definir', 'pagado', 713.70),
-(36, 15, NULL, '2026-01-07 17:18:36', 'tarjeta', 'Por definir', 'pagado', 286.00);
+(36, 15, NULL, '2026-01-07 17:18:36', 'tarjeta', 'Por definir', 'pagado', 286.00),
+(37, 15, NULL, '2026-01-08 14:41:06', 'tarjeta', 'Por definir', 'pendiente', 182.00);
 
 -- --------------------------------------------------------
 
@@ -272,39 +274,39 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `caracteristica`, `precio_unidad`, `categoria`, `disponibilidad`, `imagen`) VALUES
-(1, '911 Experience – Filete con trufa negra', 'Filete premium sellado al punto con crema de trufa negra y reducción de vino tinto.', '4,1s · 290g · 394 kcal · 98% satisfacción', 167.00, 'primeros', 1, 'platos/primeros/911 Experience – Filete con trufa negra.webp'),
-(2, '718 Essence – Tataki de Atún con Caviar', 'Tataki de atún rojo con perlas de caviar y emulsión de yuzu.', '4,5s · 210g · 312 kcal · 96% satisfacción', 142.00, 'primeros', 1, 'platos/primeros/718 Essence – Tataki de Atún con Caviar.webp'),
-(3, 'Macan Green – Ensalada de brotes y almendras', 'Mezcla de brotes frescos, almendras tostadas y vinagreta cítrica.', '3,2s · 180g · 185 kcal · 92% satisfacción', 58.00, 'primeros', 1, 'platos/primeros/Macan Green – Ensalada de brotes y almendras.webp'),
-(4, 'Panamera Cream – Crema de calabaza y jengibre', 'Crema suave de calabaza con jengibre fresco y aceite de oliva premium.', '4,0s · 250g · 220 kcal · 94% satisfacción', 44.00, 'primeros', 1, 'platos/primeros/Panamera Cream – Crema de calabaza y jengibre.webp'),
-(5, 'Cayenne Fusion – Gyozas de pato glaseado', 'Gyozas rellenas de pato, lacadas en reducción de soja y miel.', '3,8s · 6 unidades · 305 kcal · 95% satisfacción', 79.00, 'primeros', 1, 'platos/primeros/Gyozas de pato glaseado.webp'),
-(6, 'Boxster Fire – Carpaccio de buey', 'Finas láminas de buey madurado con parmesano y aceite trufado.', '3,6s · 160g · 278 kcal · 96% satisfacción', 91.00, 'primeros', 1, 'platos/primeros/Boxster Fire – Carpaccio de buey.webp'),
-(7, 'Panamera Deluxe – Solomillo al Vino Tinto', 'Solomillo con champiñones franceses y láminas de oro comestible.', '4,3s · 260g · 645 kcal · 95% satisfacción', 174.00, 'segundos', 1, 'platos/segundos/Panamera Deluxe – Solomillo al Vino Tinto.webp'),
-(8, 'Taycan Gold Risotto', 'Costillas de cerdo cocinadas 12 horas con reducción miel-mostaza.', '6,2s · 380g · 645 kcal · 95% satisfacción', 152.00, 'segundos', 1, 'platos/segundos/Taycan Gold Risotto.webp'),
-(9, 'Cayman Red – Magret de pato', 'Magret con salsa de frutos rojos y quinoa especiada.', '4,9s · 240g · 520 kcal · 96% satisfacción', 129.00, 'segundos', 1, 'platos/segundos/Cayman Red – Magret de pato.webp'),
-(10, 'Turbo Flame – Lomo de Wagyu flambeado', 'Wagyu japonés A5 flambeado con whisky y mantequilla cítrica.', '3,7s · 280g · 790 kcal · 99% satisfacción', 310.00, 'segundos', 1, 'platos/segundos/Turbo Flame – Lomo de Wagyu flambeado.webp'),
-(11, 'Carrera Blue – Bacalao confitado', 'Bacalao con pilpil suave y aceite ahumado.', '4,4s · 300g · 390 kcal · 94% satisfacción', 138.00, 'segundos', 1, 'platos/segundos/Carrera Blue – Bacalao confitado.webp'),
-(12, 'Speedster Grill – Costillar BBQ gourmet', 'Costillar a baja temperatura con salsa BBQ artesana.', '6,0s · 450g · 860 kcal · 97% satisfacción', 148.00, 'segundos', 1, 'platos/segundos/Speedster Grill – Costillar BBQ gourmet.webp'),
-(13, 'Taycan Sweet – Mousse de chocolate con oro', 'Mousse belga con oro comestible y cacao tostado.', '4,8s · 180g · 412 kcal · 99% satisfacción', 158.00, 'postres', 1, 'platos/postres/Taycan Sweet – Mousse de chocolate con oro.webp'),
-(14, '911 Turbo – Soufflé de vainilla al ron', 'Soufflé de vainilla bourbon con ron añejo.', '5,1s · 210g · 389 kcal · 98% satisfacción', 122.00, 'postres', 1, 'platos/postres/911 Turbo – Soufflé de vainilla al ron.webp'),
-(15, 'Taycan Gold – Champagne de trufa blanca', 'Champagne con notas terrosas y final sedoso.', '3,9s · 150ml · 12,5% alcohol · 99% satisfacción', 220.00, 'bebidas', 1, 'platos/bebidas/Taycan Gold – Champagne de trufa blanca.webp'),
-(16, '911 Spirit – Cóctel de ron y cítricos', 'Cóctel de ron añejo con oro líquido.', '4,2s · 180ml · 18% alcohol · 97% satisfacción', 197.00, 'bebidas', 1, 'platos/bebidas/911 Spirit – Cóctel de ron y cítricos.webp'),
-(17, 'Carrera Frost – Helado artesanal de vainilla negra', 'Vainilla negra con crumble de chocolate.', '3,2s · 160g · 285 kcal · 95% satisfacción', 42.00, 'postres', 1, 'platos/postres/Carrera Frost – Helado artesanal de vainilla negra.webp'),
-(18, 'Macan Cloud – Tiramisú cremoso', 'Tiramisú con cacao premium y crema ligera.', '4,1s · 200g · 470 kcal · 96% satisfacción', 55.00, 'postres', 1, 'platos/postres/Macan Cloud – Tiramisú cremoso.webp'),
-(19, 'Cayenne Velvet – Cheesecake de frutos rojos', 'Cheesecake horneado con frutos rojos frescos.', '4,6s · 220g · 510 kcal · 97% satisfacción', 61.00, 'postres', 1, 'platos/postres/Cayenne Velvet – Cheesecake de frutos rojos.webp'),
-(20, 'Panamera Dark – Brownie caliente', 'Brownie fundente con nueces tostadas.', '3,7s · 180g · 540 kcal · 98% satisfacción', 49.00, 'postres', 1, 'platos/postres/Panamera Dark – Brownie caliente.webp'),
-(21, 'Boxster Citrus – Mousse de limón y jengibre', 'Mousse ligera con notas cítricas.', '3,8s · 170g · 290 kcal · 94% satisfacción', 52.00, 'postres', 1, 'platos/postres/Boxster Citrus – Mousse de limón y jengibre.webp'),
-(22, 'Spyder Cream – Crème brûlée clásica', 'Vainilla fresca y caramelización perfecta.', '4,0s · 190g · 320 kcal · 97% satisfacción', 64.00, 'postres', 1, 'platos/postres/Spyder Cream – Crème brûlée clásica .webp'),
-(23, 'Turbo Boost – Espresso doble', 'Café de origen etíope con tostado intenso.', '2,1s · 60ml · 0 kcal · 98% satisfacción', 12.00, 'bebidas', 1, 'platos/bebidas/Turbo Boost – Espresso doble.webp'),
-(24, 'Panamera White – Latte cremosa', 'Café suave con leche vaporizada.', '2,5s · 300ml · 160 kcal · 94% satisfacción', 15.00, 'bebidas', 1, 'platos/bebidas/Panamera White – Latte cremosa.webp'),
-(25, 'Cayenne Fire – Infusión de jengibre', 'Infusión caliente con limón y jengibre fresco.', '3,1s · 250ml · 22 kcal · 96% satisfacción', 14.00, 'bebidas', 1, 'platos/bebidas/Cayenne Fire – Infusión de jengibre.webp'),
-(26, 'Boxster Ice – Limonada premium', 'Limonada artesanal con hierbabuena.', '1,9s · 330ml · 110 kcal · 95% satisfacción', 10.00, 'bebidas', 1, 'platos/bebidas/Boxster Ice – Limonada premium.webp'),
-(27, 'Macan Fresh – Agua mineral', 'Agua natural de manantial.', '1,0s · 500ml · 0 kcal · 97% satisfacción', 4.00, 'bebidas', 1, 'platos/bebidas/Macan Fresh – Agua mineral.webp'),
-(28, 'GT3 Punch – Mocktail tropical', 'Cítricos y frutas tropicales sin alcohol.', '2,8s · 300ml · 140 kcal · 96% satisfacción', 18.00, 'bebidas', 1, 'platos/bebidas/GT3 Punch – Mocktail tropical.webp'),
-(29, 'Turbo Red – Vino tinto reserva', 'Vino de crianza con notas especiadas.', '3,5s · 150ml · 14% alcohol · 96% satisfacción', 22.00, 'bebidas', 1, 'platos/bebidas/Turbo Red – Vino tinto reserva.webp'),
-(30, 'Carrera Gold – Cerveza artesanal', 'Cerveza rubia premium.', '2,2s · 330ml · 120 kcal · 92% satisfacción', 11.00, 'bebidas', 1, 'platos/bebidas/Carrera Gold – Cerveza artesanal.webp'),
-(31, 'Cayman Chocolate Sphere', 'Delicada esfera de chocolate oscuro con corazón fundente.', '3,5 s · 165 g · 510 kcal · 97% satisfacción', 47.00, 'postres', 1, 'platos/postres/Cayman Chocolate Sphere.webp'),
-(32, 'Porsche 911 Vanilla Precision', 'Mousse de vainilla natural de textura sedosa sobre crumble crujiente de mantequilla', '3,2 s · 150 g · 460 kcal · 96% satisfacción', 45.00, 'postres', 1, 'platos/postres/Porsche 911 Vanilla Precision.webp'),
-(136, 'Kobe Apex – Solomillo Imperial', 'Solomillo de auténtico Kobe japonés A5 marcado a la brasa y terminado con sal mineral ahumada.', '4,1 s · 260 g · 820 kcal · 98% satisfacción', 335.00, 'Segundos', 1, 'platos/segundos/Kobe Apex – Solomillo Imperial.webp');
+(1, 'Filete premium con trufa negra 911 Experience', 'Filete premium sellado al punto con crema de trufa negra y reducción de vino tinto.', '4,1s · 290g · 394 kcal · 98% satisfacción', 167.00, 'primeros', 1, 'platos/primeros/911-experience-filete-con-trufa-negra.webp'),
+(2, '718 essence tataki de atun con caviar', 'Atún rojo sellado brevemente para preservar su textura y sabor, acompañado de caviar selecto que aporta un toque salino y sofisticado. ', '4,5s · 210g · 312 kcal · 96% satisfacción', 142.00, 'primeros', 1, 'platos/primeros/718-essence-tataki-de-atun-con-caviar.webp'),
+(3, 'Macan green ensalada de brotes y almendras', 'Mezcla de brotes frescos, almendras tostadas y vinagreta cítrica.', '3,2s · 180g · 185 kcal · 92% satisfacción', 58.00, 'primeros', 1, 'platos/primeros/macan-green-ensalada-de-brotes-y-almendras.webp'),
+(4, 'Panamera cream crema de calabaza y jengibre', 'Crema suave de calabaza con jengibre fresco y aceite de oliva premium', '4,0s · 250g · 220 kcal · 94% satisfacción', 44.00, 'primeros', 1, 'platos/primeros/panamera-cream-crema-de-calabaza-y-jengibre.webp'),
+(5, 'Cayenne Fusion Gyozas de pato glaseado', 'Gyozas rellenas de pato, lacadas en reducción de soja y miel.', '3,8s · 6 unidades · 305 kcal · 95% satisfacción', 79.00, 'primeros', 1, 'platos/primeros/cayenne-fusion-gyozas-de-pato-glaseado.webp'),
+(6, 'Boxster Fire Carpaccio de buey', 'Finas láminas de buey de primera calidad, aderezadas con un aliño suave que realza su sabor natural.', '3,6s · 160g · 278 kcal · 96% satisfacción', 91.00, 'primeros', 1, 'platos/primeros/boxster-fire-carpaccio-de-buey.webp'),
+(7, 'Panamera Deluxe  Solomillo al Vino Tinto', 'Solomillo con champiñones franceses y láminas de oro comestible.', '4,3s · 260g · 645 kcal · 95% satisfacción', 174.00, 'segundos', 1, 'platos/segundos/panamera-deluxe-solomillo-al-vino-tinto.webp'),
+(8, 'Taycan Gold Risotto', 'Costillas de cerdo cocinadas 12 horas con reducción miel-mostaza.', '6,2s · 380g · 645 kcal · 95% satisfacción', 152.00, 'segundos', 1, 'platos/segundos/taycan-gold-risotto.webp'),
+(9, 'Cayman Red Magret de pato', 'Magret con salsa de frutos rojos y quinoa especiada.', '4,9s · 240g · 520 kcal · 96% satisfacción', 129.00, 'segundos', 1, 'platos/segundos/cayman-red-magret-de-pato.webp'),
+(10, 'Turbo Flame – Lomo de Wagyu flambeado', 'Wagyu japonés A5 flambeado con whisky y mantequilla cítrica.', '3,7s · 280g · 790 kcal · 99% satisfacción', 310.00, 'segundos', 1, 'platos/segundos/turbo-flame-lomo-de-wagyu-flambeado.webp'),
+(11, 'Carrera Blue Bacalao confitado', 'Bacalao con pilpil suave y aceite ahumado.', '4,4s · 300g · 390 kcal · 94% satisfacción', 138.00, 'segundos', 1, 'platos/segundos/carrera-blue-bacalao-confitado.webp'),
+(12, 'Speedster Grill Costillar BBQ gourmet', 'Costillar a baja temperatura con salsa BBQ artesana.', '6,0s · 450g · 860 kcal · 97% satisfacción', 148.00, 'segundos', 1, 'platos/segundos/speedster-grill-costillar-bbq-gourmet.webp'),
+(13, 'Taycan Sweet Mousse de chocolate con oro', 'Mousse belga con oro comestible y cacao tostado.', '4,8s · 180g · 412 kcal · 99% satisfacción', 158.00, 'postres', 1, 'platos/postres/taycan-sweet-mousse-de-chocolate-con-oro.webp'),
+(14, '911 Turbo Souffle de vainilla al ron', 'Soufflé de vainilla bourbon con ron añejo.', '5,1s · 210g · 389 kcal · 98% satisfacción', 122.00, 'postres', 1, 'platos/postres/911-turbo-souffle-de-vainilla-al-ron.webp'),
+(15, 'Taycan Gold Champagne de trufa blanca', 'Champagne con notas terrosas y final sedoso.', '3,9s · 150ml · 12,5% alcohol · 99% satisfacción', 220.00, 'bebidas', 1, 'platos/bebidas/taycan-gold-champagne-de-trufa-blanca.webp'),
+(16, '911 Spirit Cóctel de ron y cítricos', 'Cóctel de ron añejo con oro líquido.', '4,2s · 180ml · 18% alcohol · 97% satisfacción', 197.00, 'bebidas', 1, 'platos/bebidas/911-spirit-coctel-de-ron-y-citricos.webp'),
+(17, 'Carrera Frost Helado artesanal de vainilla negra', 'Vainilla negra con crumble de chocolate.', '3,2s · 160g · 285 kcal · 95% satisfacción', 42.00, 'postres', 1, 'platos/postres/carrera-frost-helado-de-vainilla-negra.webp'),
+(18, 'Macan Cloud Tiramisú cremoso', 'Tiramisú con cacao premium y crema ligera.', '4,1s · 200g · 470 kcal · 96% satisfacción', 55.00, 'postres', 1, 'platos/postres/macan-cloud-tiramisu-cremoso.webp'),
+(19, 'Cayenne Velvet Cheesecake de frutos rojos', 'Cheesecake horneado con frutos rojos frescos.', '4,6s · 220g · 510 kcal · 97% satisfacción', 61.00, 'postres', 1, 'platos/postres/cayenne-velvet-cheesecake-de-frutos-rojos.webp'),
+(20, 'Panamera Dark Brownie caliente', 'Brownie fundente con nueces tostadas.', '3,7s · 180g · 540 kcal · 98% satisfacción', 49.00, 'postres', 1, 'platos/postres/panamera-dark-brownie-caliente.webp'),
+(21, 'Boxster Citrus Mousse de limón y jengibre', 'Mousse ligera con notas cítricas.', '3,8s · 170g · 290 kcal · 94% satisfacción', 52.00, 'postres', 1, 'platos/postres/boxster-citrus-mousse-de-limon-y-jengibre.webp'),
+(22, 'Spyder Cream – Crème brûlée clásica', 'Vainilla fresca y caramelización perfecta.', '4,0s · 190g · 320 kcal · 97% satisfacción', 64.00, 'postres', 1, 'platos/postres/spyder-cream-creme-brulee-clasica.webp'),
+(23, 'Turbo Boost Espresso doble', 'Café de origen etíope con tostado intenso.', '2,1s · 60ml · 0 kcal · 98% satisfacción', 12.00, 'bebidas', 1, 'platos/bebidas/turbo-boost-espresso-doble.webp'),
+(24, 'Panamera White Latte cremosa', 'Café suave con leche vaporizada.', '2,5s · 300ml · 160 kcal · 94% satisfacción', 15.00, 'bebidas', 1, 'platos/bebidas/panamera-white-latte-cremosa.webp'),
+(25, 'Cayenne Fire Infusión de jengibre', 'Infusión caliente con limón y jengibre fresco.', '3,1s · 250ml · 22 kcal · 96% satisfacción', 14.00, 'bebidas', 1, 'platos/bebidas/cayenne-fire-infusion-de-jengibre.webp'),
+(26, 'Boxster Ice Limonada premium', 'Limonada artesanal con hierbabuena.', '1,9s · 330ml · 110 kcal · 95% satisfacción', 10.00, 'bebidas', 1, 'platos/bebidas/boxster-ice-limonada-premium.webp'),
+(27, 'Macan Fresh Agua mineral', 'Agua natural de manantial.', '1,0s · 500ml · 0 kcal · 97% satisfacción', 4.00, 'bebidas', 1, 'platos/bebidas/macan-fresh-agua-mineral.webp'),
+(28, 'GT3 Punch Mocktail tropical', 'Cítricos y frutas tropicales sin alcohol.', '2,8s · 300ml · 140 kcal · 96% satisfacción', 18.00, 'bebidas', 1, 'platos/bebidas/gt3-punch-mocktail-tropical.webp'),
+(29, 'Turbo Red Vino tinto reserva', 'Vino de crianza con notas especiadas.', '3,5s · 150ml · 14% alcohol · 96% satisfacción', 22.00, 'bebidas', 1, 'platos/bebidas/turbo-red-vino-tinto-reserva.webp'),
+(30, 'Carrera Gold Cerveza artesanal', 'Cerveza rubia premium.', '2,2s · 330ml · 120 kcal · 92% satisfacción', 11.00, 'bebidas', 1, 'platos/bebidas/carrera-gold-cerveza-artesanal.webp'),
+(31, 'Cayman Chocolate Sphere', 'Delicada esfera de chocolate oscuro con corazón fundente.', '3,5 s · 165 g · 510 kcal · 97% satisfacción', 47.00, 'postres', 1, 'platos/postres/cayman-chocolate-sphere.webp'),
+(32, 'Porsche 911 Vanilla Precision', 'Mousse de vainilla natural de textura sedosa sobre crumble crujiente de mantequilla', '3,2 s · 150 g · 460 kcal · 96% satisfacción', 45.00, 'postres', 1, 'platos/postres/porsche-911-vanilla-precision.webp'),
+(136, 'Kobe Apex Solomillo Imperial', 'Solomillo de auténtico Kobe japonés A5 marcado a la brasa y terminado con sal mineral ahumada.', '4,1 s · 260 g · 820 kcal · 98% satisfacción', 335.00, 'segundos', 1, 'platos/segundos/kobe-apex-solomillo-imperial.webp');
 
 -- --------------------------------------------------------
 
@@ -332,7 +334,8 @@ INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellidos`, `telefono`, `direcci
 (1, 'Polba', 'balaguer', '617892989', 'Papiol', 'polba@gmail.com', '$2y$10$PefbcOkrBH8a20XRoPJiIunHWb20/cPfTly27WUtowNwZQtXTVpMu', 'cliente', '2025-12-10 20:38:35'),
 (8, 'prueba', '', '', '', 'prueba@gmail.com', '$2y$10$tsnHyye0McF60TnKhUnUu.mt1XG7Z6a4szvuF/ycU02k52eQyJHw.', 'cliente', '2025-12-11 15:48:46'),
 (15, 'Admin', NULL, NULL, NULL, 'admin@gmail.com', '$2y$10$PbX1ExcjZaIIwMkisA452.b1.4m.UrDUPVV9eHgz5x0M2p3iSk0ki', 'admin', '2025-12-16 12:08:09'),
-(17, 'joao', 'meneses', '731993193', 'Barcelona', 'joao1@jo.com', '$2y$10$qJcdJNQkW4ukU5xl0f97HOmZd95pMLg8SADwdsyBdz4r0otZvaVQe', 'cliente', '2026-01-07 17:21:13');
+(17, 'joao', 'meneses', '731993193', 'Barcelona', 'joao1@jo.com', '$2y$10$qJcdJNQkW4ukU5xl0f97HOmZd95pMLg8SADwdsyBdz4r0otZvaVQe', 'cliente', '2026-01-07 17:21:13'),
+(18, 'a', '', '', '', 'a@a.com', '$2y$10$PtRLwnkW9a5Ilvbw1aI1XuJkwtDQYu2t296t00lRCTC3NO2jl/gDK', 'cliente', '2026-01-08 14:08:23');
 
 --
 -- Índices para tablas volcadas
@@ -402,7 +405,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `lineapedido`
 --
 ALTER TABLE `lineapedido`
-  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT de la tabla `logacciones`
@@ -420,7 +423,7 @@ ALTER TABLE `oferta`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -432,7 +435,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restricciones para tablas volcadas

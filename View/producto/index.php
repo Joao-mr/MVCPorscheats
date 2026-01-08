@@ -56,7 +56,7 @@ $selectedCategory = $selectedCategory ?? 'todos';
                                     <article class="card-producto h-100 d-flex flex-column">
 
                                         <div class="card-producto__media">
-                                            <img src="/MVCPorscheats/public/images/<?= $producto->getImagen(); ?>" alt="<?= $producto->getNombre(); ?>">
+                                            <img src="public/images/<?= $producto->getImagen(); ?>" alt="<?= $producto->getNombre(); ?>">
                                         </div>
 
                                         <div class="card-producto__body flex-grow-1 d-flex flex-column">
@@ -75,7 +75,7 @@ $selectedCategory = $selectedCategory ?? 'todos';
                                                     data-id="<?= $producto->getId_producto(); ?>"
                                                     data-nombre="<?= $producto->getNombre(); ?>"
                                                     data-precio="<?= $producto->getPrecio_unidad(); ?>"
-                                                    data-imagen="/MVCPorscheats/public/images/<?= $producto->getImagen(); ?>"
+                                                    data-imagen="public/images/<?= $producto->getImagen(); ?>"
                                                     data-categoria="<?= $producto->getCategoria(); ?>"
                                                 >
                                                     Comprar
