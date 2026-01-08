@@ -32,6 +32,15 @@ class productoController {
             $productosPorCategoria[$categoriaKey][] = $producto;
         }
 
+        $ordenCategorias = ['primeros','segundos','postres','bebidas'];
+        $ordenados = [];
+        foreach ($ordenCategorias as $cat) {
+            if (isset($productosPorCategoria[$cat])) {
+                $ordenados[$cat] = $productosPorCategoria[$cat];
+            }
+        }
+        $productosPorCategoria = $ordenados + $productosPorCategoria;
+
         $view = 'view/producto/index.php';
         $navClass = 'estilo_negro';
         include_once 'view/main.php';
