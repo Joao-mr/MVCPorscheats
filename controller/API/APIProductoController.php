@@ -62,7 +62,7 @@ class APIProductoController extends APIController
         $productos = ProductoDAO::getProductos();
         $data = array_map([$this, 'serializeProducto'], $productos);
         $this->respondOk($data);
-    }
+    }  
 
     /**
      * Convierte el objeto Producto en un array público para JSON.
@@ -90,7 +90,6 @@ class APIProductoController extends APIController
                 ? $producto->getDescripcion()
                 : ''
         ];
-        }
     }
 
     /**
