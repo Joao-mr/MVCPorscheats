@@ -12,7 +12,7 @@ class Database
         string $pass = 'root'
         
     ): mysqli {
-        $con = new mysqli($host, $user, $pass, $db, 3307);
+        $con = new mysqli($host, $user, $pass, $db,/*3307*/);
 
         if ($con->connect_error) {
             die('Error al conectar con la base de datos: ' . $con->connect_error);
